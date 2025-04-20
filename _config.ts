@@ -1,0 +1,123 @@
+import lume from "lume/mod.ts";
+import jsx from "lume/plugins/jsx.ts";
+import pagefind from "lume/plugins/pagefind.ts";
+import sitemap from "lume/plugins/sitemap.ts";
+import postcss from "lume/plugins/postcss.ts";
+import tailwindcss from "lume/plugins/tailwindcss.ts";
+import mdx from "lume/plugins/mdx.ts";
+import metas from "lume/plugins/metas.ts";
+import minify_html from "lume/plugins/minify_html.ts";
+import base_path from "lume/plugins/base_path.ts";
+import esbuild from "lume/plugins/esbuild.ts";
+
+import favicon from "lume/plugins/favicon.ts";
+import feed from "lume/plugins/feed.ts";
+import remark from "lume/plugins/remark.ts";
+import remarkBreaks from "npm:remark-breaks";
+import { createHighlighter } from "npm:shiki";
+import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
+import footnote from "./plugins/footnote.ts";
+
+import tailwindOptions from "./tailwind.config.js";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_URL,
+  AUTHER,
+} from "./src/consts.ts";
+
+const highlighter = await createHighlighter({
+  themes: ["everforest-dark"],
+  // themes: ["everforest-light", "everforest-dark"],
+  langs: ["py", "ts", "js", "sh", "md", "lua", "go", "lisp"],
+});
+
+const site = lume({
+  src: "./src",
+  location: new URL("https://hagatasdelus.github.io"),
+});
+
+site.use(jsx());
+site.use(mdx());
+site.use(base_path());
+site.use(metas());
+
+site.use(minify_html());
+
+site.use(esbuild({ options: { minify: false } }));
+site.use(pagefind());
+site.use(sitemap());
+
+site.use(
+  favicon({
+    input: "./public/assets/icons/favicon.svg",
+    favicons: [
+      { url: "/icons/favicon.ico", size: [48], rel: "icon", format: "ico" },
+      {
+        url: "/icons/apple-touch-icon.png",
+        size: [180],
+        rel: "apple-touch-icon",
+        format: "png",
+      },
+    ],
+  })
+);
+
+site.use(
+  feed({
+    output: ["api/feed.xml", "api/feed.json"],
+    query: "posts",
+    info: {
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      lang: "ja",
+      authorName: AUTHER,
+      authorUrl: SITE_URL,
+      published: new Date(),
+    },
+  })
+);
+
+site.use(
+  feed({
+    output: ["diary/api/feed.xml", "diary/api/feed.json"],
+    query: "diary",
+    info: {
+      title: SITE_TITLE,
+      description: SITE_DESCRIPTION,
+      lang: "ja",
+      authorName: AUTHER,
+      authorUrl: SITE_URL,
+      published: new Date(),
+    },
+  })
+);
+
+site.use(
+  remark({
+    remarkPlugins: [remarkBreaks],
+    rehypePlugins: [
+      [
+        rehypeShikiFromHighlighter,
+        highlighter,
+        {
+          // themes: { light: "everforest-light", dark: "everforest-dark" },
+          theme: "everforest-dark",
+        },
+      ],
+    ],
+  })
+);
+
+site.use(footnote());
+
+site.use(tailwindcss({ options: tailwindOptions }));
+site.use(postcss());
+
+site.ignore("README.md", "node_modules");
+
+site.copy("./images", "images");
+site.copy("./public/assets/icons", "icons");
+// site.copy("./public/assets/fonts", "fonts");
+
+export default site;

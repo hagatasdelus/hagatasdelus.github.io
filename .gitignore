@@ -1,0 +1,14 @@
+_site
+_cache
+.DS_Store
+node_modules
+
+/.idea/
+/.vscode/
+
+.env
+*.orig
+*.pyc
+*.swp
+
+.git-old
