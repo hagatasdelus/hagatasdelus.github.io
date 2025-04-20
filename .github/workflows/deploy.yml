@@ -31,6 +31,12 @@ jobs:
         with:
           path: "_site"
 
-      - name: Deploy to GitHub Pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
