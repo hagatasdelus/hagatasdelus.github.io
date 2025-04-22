@@ -28,7 +28,7 @@ export function applyTheme(theme: Theme, animate = false): void {
     rootElement.classList.add("theme-transition");
     setTimeout(() => {
       rootElement.classList.remove("theme-transition");
-    }, 500);
+    }, 250);
   } else {
     rootElement.classList.remove("theme-transition");
   }
