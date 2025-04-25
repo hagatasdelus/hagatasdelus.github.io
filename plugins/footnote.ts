@@ -33,6 +33,13 @@ export default function (userOptions?: FootnoteOptions) {
         footnoteSection.insertBefore(heading, footnoteSection.firstChild);
         footnoteSection.insertBefore(hr, footnoteSection.firstChild);
 
+        const backrefLinks = page.document.querySelectorAll(
+          "[data-footnote-backref]"
+        );
+        backrefLinks.forEach((aLink) => {
+          aLink.textContent = "↩︎";
+        });
+
         const footnoteItems = footnoteSection.querySelectorAll("li");
         footnoteItems.forEach((item) => {
           item.setAttribute(
