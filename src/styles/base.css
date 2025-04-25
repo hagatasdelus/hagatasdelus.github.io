@@ -69,14 +69,8 @@ html {
 }
 
 html.theme-transition {
-  transition: all 0.25s ease-in-out;
-}
-
-html.theme-transition .text-accent,
-html.theme-transition .bg-accent {
-  transition: color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
-}
-
-html.theme-transition .main-container h2 a {
-  transition: color 0.1s ease;
+  transition: all 0.2s ease-in-out;
+  /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
+    fill 0.2s ease-in-out;  */
 }

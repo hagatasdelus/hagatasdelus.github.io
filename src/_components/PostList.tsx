@@ -16,13 +16,11 @@ export default function PostList(props: Lume.Data) {
   const displayTags = tags.filter((tag) => tag !== "posts");
 
   return (
-    <div className="w-full mb-4 p-4 hover:bg-base-200/50 dark:hover:bg-base-300/30 transition-all rounded-md">
+    <div className="w-full mb-4 p-4 hover:bg-base-200/50 dark:hover:bg-base-300/30 rounded-md">
+      {" "}
       <div className="flex flex-row justify-between items-center gap-4">
         <h2 className="text-lg md:text-xl font-medium">
-          <a
-            href={url}
-            className="hover:text-accent dark:hover:text-accent transition-colors"
-          >
+          <a href={url} className="hover:text-accent dark:hover:text-accent">
             {title}
           </a>
         </h2>
@@ -30,13 +28,12 @@ export default function PostList(props: Lume.Data) {
           {formattedDate}
         </div>
       </div>
-
       {displayTags.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-2">
           {displayTags.map((tag) => (
             <span
               key={tag}
-              className="border border-current opacity-70 px-2 py-1 rounded-md text-xs transition-colors duration-300"
+              className="border border-current opacity-70 px-2 py-1 rounded-md text-xs"
             >
               {tag}
             </span>

@@ -64,11 +64,11 @@ export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
             <div key={groupIndex}>
               <div className="flex items-center mt-8 mb-6 first:mt-0">
                 <div className="flex-none pr-4">
-                  <h2 className="text-accent dark:text-accent text-2xl font-bold transition-colors duration-300">
+                  <h2 className="text-accent dark:text-accent text-2xl font-bold">
                     {yearGroup.year}
                   </h2>
                 </div>
-                <div className="flex-grow h-px bg-accent/30 dark:bg-accent/30 transition-colors duration-300"></div>
+                <div className="flex-grow h-px bg-accent/30 dark:bg-accent/30"></div>
               </div>
 
               {yearGroup.posts.map((post, postIndex) => (
