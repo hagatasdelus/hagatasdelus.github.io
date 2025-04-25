@@ -52,7 +52,7 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
                         {displayTags.map((tag: string) => (
                           <span
                             key={tag}
-                            className="border border-current opacity-70 px-2 py-1 rounded-md text-xs transition-colors duration-300"
+                            className="border border-current opacity-70 px-2 py-1 rounded-md text-xs duration-300"
                           >
                             {tag}
                           </span>

@@ -8,14 +8,14 @@ export default function Footer() {
           <p className="text-right">
             <a
               href="/info"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4 transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"
             >
               CC BY-SA 4.0
             </a>
             <span>&nbsp;2025-PRESENT &copy;&nbsp;</span>
             <a
               href="/about"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4 transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"
             >
               Hagata
             </a>

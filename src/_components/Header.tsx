@@ -16,7 +16,7 @@ export default function Header() {
           <h1 className="text-2xl font-bold">
             <a
               href="/"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
             >
               {SITE_TITLE}
             </a>
@@ -25,7 +25,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div
               id="theme-toggle"
-              className="cursor-pointer p-2 text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+              className="cursor-pointer p-2 text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
               aria-label="テーマ切替"
             >
               <span className="relative inline-block w-6 h-6">
@@ -45,7 +45,7 @@ export default function Header() {
               <div
                 tabIndex={0}
                 role="button"
-                className="p-2 cursor-pointer text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+                className="p-2 cursor-pointer text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
               >
                 <svg
                   className="w-6 h-6"
@@ -71,7 +71,7 @@ export default function Header() {
                   <li key={item.name} className="py-2 px-4">
                     <a
                       href={item.href}
-                      className="block w-full text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+                      className="block w-full text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
                     >
                       {item.name}
                     </a>
@@ -85,7 +85,7 @@ export default function Header() {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+                    className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
                   >
                     {item.name}
                   </a>
