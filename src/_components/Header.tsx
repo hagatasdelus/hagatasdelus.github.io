@@ -41,11 +41,17 @@ export default function Header() {
               </span>
             </div>
 
-            <div className="dropdown dropdown-end md:hidden">
-              <div
-                tabIndex={0}
-                role="button"
-                className="p-2 cursor-pointer text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
+            <div className="md:hidden relative">
+              <input
+                type="checkbox"
+                id="menu-toggle"
+                className="hidden peer"
+                aria-hidden="true"
+              />
+
+              <label
+                htmlFor="menu-toggle"
+                className="p-2 cursor-pointer text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent block"
               >
                 <svg
                   className="w-6 h-6"
@@ -61,20 +67,31 @@ export default function Header() {
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
-              </div>
+              </label>
+
+              <label
+                htmlFor="menu-toggle"
+                className="fixed inset-0 z-10 hidden peer-checked:block"
+                aria-hidden="true"
+              ></label>
 
               <ul
-                tabIndex={0}
-                className="dropdown-content bg-base-100 dark:bg-base-300 rounded-lg shadow-lg mt-3 p-2 w-32 z-[1]"
+                className="absolute right-0 top-full mt-3 p-2 w-32 z-20 bg-base-100 dark:bg-base-300 rounded-lg shadow-lg hidden peer-checked:block"
+                role="menu"
               >
                 {navigation.map((item) => (
                   <li key={item.name} className="py-2 px-4">
-                    <a
-                      href={item.href}
-                      className="block w-full text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
+                    <label
+                      htmlFor="menu-toggle"
+                      className="block cursor-pointer"
                     >
-                      {item.name}
-                    </a>
+                      <a
+                        href={item.href}
+                        className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent"
+                      >
+                        {item.name}
+                      </a>
+                    </label>
                   </li>
                 ))}
               </ul>
