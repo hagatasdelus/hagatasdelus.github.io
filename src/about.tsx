@@ -12,10 +12,10 @@ export default function () {
   // children, title
   return (
     <>
-      <div className="">
+      <div>
         <h2 className="text-2xl md:text-4xl text-left my-4">About Me</h2>
       </div>
-      <div className="prose flex flex-col items-center mx-auto">
+      <div className="prose text-center mx-auto">
         <img
           src={`/icons/hagata.png`}
           alt="hagata"

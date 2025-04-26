@@ -2,10 +2,10 @@ import SocialList from "./SocialList.tsx";
 
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-accent text-gray-500 dark:text-gray-300 text-xs px-8 md:px-12 lg:px-16 pt-2 flex flex-col gap-1 justify-between w-full mt-auto">
+    <footer className="border-t-2 border-accent text-gray-500 dark:text-gray-300 text-xs px-8 md:px-12 lg:px-16 pt-2 w-full mt-auto">
       <div className="container mx-auto">
-        <div className="flex justify-end">
-          <p className="text-right">
+        <div className="text-right">
+          <p>
             <a
               href="/info"
               className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"

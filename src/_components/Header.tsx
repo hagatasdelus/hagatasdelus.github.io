@@ -15,14 +15,14 @@ export default function Header() {
   return (
     <header>
       <div className="container mx-auto px-8 md:px-12 lg:px-16">
-        <nav className="flex justify-between items-center h-16">
+        <nav className="grid grid-cols-[auto_1fr] items-center h-16">
           <h1 className="text-2xl font-bold">
             <a href="/" className={linkStyle}>
               {SITE_TITLE}
             </a>
           </h1>
 
-          <div className="flex items-center space-x-4">
+          <div className="justify-self-end flex items-center space-x-4">
             <div
               id="theme-toggle"
               className={`cursor-pointer p-2 ${linkStyle}`}

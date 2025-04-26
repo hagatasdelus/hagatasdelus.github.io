@@ -30,9 +30,9 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
           <title>{title || SITE_TITLE}</title>
           <meta name="description" content={SITE_DESCRIPTION} />
         </head>
-        <body className="flex flex-col min-h-screen">
+        <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />
-          <div className="main-container container max-w-4xl mx-auto px-2 flex-grow flex flex-col">
+          <div className="main-container container max-w-4xl mx-auto px-2">
             <article className="my-8">
               {title && (
                 <div className="mb-6">
@@ -40,7 +40,7 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
                     {title}
                   </h1>
 
-                  <div className="flex flex-wrap items-center text-gray-500 dark:text-gray-400">
+                  <div className="grid grid-cols-[auto_auto] gap-4 items-center text-gray-500 dark:text-gray-400 sm:flex sm:flex-wrap">
                     {formattedDate && (
                       <time dateTime={pubDate.toString()} className="mr-4">
                         {formattedDate}

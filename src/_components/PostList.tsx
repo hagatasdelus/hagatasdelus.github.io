@@ -17,14 +17,13 @@ export default function PostList(props: Lume.Data) {
 
   return (
     <div className="w-full mb-4 p-4 hover:bg-base-200/50 dark:hover:bg-base-300/30 rounded-md">
-      {" "}
-      <div className="flex flex-row justify-between items-center gap-4">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-4">
         <h2 className="text-lg md:text-xl font-medium">
           <a href={url} className="hover:text-accent dark:hover:text-accent">
             {title}
           </a>
         </h2>
-        <div className="flex-shrink-0 text-sm font-mono text-gray-500 dark:text-gray-400">
+        <div className="text-sm font-mono text-gray-500 dark:text-gray-400">
           {formattedDate}
         </div>
       </div>
