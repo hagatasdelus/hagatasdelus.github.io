@@ -6,7 +6,7 @@ export default ({ title, children }: Lume.Data) => {
   // helpers: Lume.Helpers
   return (
     <>
-      <html lang="en">
+      <html lang="ja">
         <head>
           <meta
             name="viewport"

@@ -81,11 +81,8 @@ def main():
         target_date = get_date()
         date_str = target_date.strftime("%Y-%m-%d")
         slug = ""
-        try:
-            while not slug:
-                slug = input("記事のスラッグを入力してください: ")
-        except KeyboardInterrupt:
-            return
+        while not slug:
+            slug = input("記事のスラッグを入力してください: ")
         final_slug = slug.strip().replace(" ", "-").lower()
         file_name = f"{date_str}-{final_slug}.md"
         file_path = os.path.join(BLOG_DIR, file_name)

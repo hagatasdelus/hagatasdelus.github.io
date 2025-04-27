@@ -23,8 +23,6 @@ deno task serve
 - OGP
 - highlight by theme
 - Search
-- Footer layout bug
-- humburger menu display
 
 </div>
 
