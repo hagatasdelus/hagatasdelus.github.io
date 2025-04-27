@@ -12,16 +12,16 @@ export default function () {
   // children, title
   return (
     <>
-      <div className="">
+      <div>
         <h2 className="text-2xl md:text-4xl text-left my-4">About Me</h2>
       </div>
-      <div className="prose flex flex-col items-center mx-auto">
+      <div className="prose text-center mx-auto">
         <img
           src={`/icons/hagata.png`}
           alt="hagata"
           className="mx-auto h-48 w-48 rounded-full md:mb-18 mt-24 md:mt-6"
         />
-        <main className="mt-4">
+        <main className="mt-4 text-left">
           <p>こんにちは、Hagataです。</p>
           <p>
             現在は京都の大学でコンピュータサイエンスを学んでいます。

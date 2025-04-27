@@ -21,14 +21,14 @@ export function getThemePreference(): Theme {
   return "light";
 }
 
-export function applyTheme(theme: Theme, animate = false): void {
+export function applyTheme(theme: Theme, animate = false) {
   const rootElement = document.documentElement;
 
   if (animate) {
     rootElement.classList.add("theme-transition");
     setTimeout(() => {
       rootElement.classList.remove("theme-transition");
-    }, 500);
+    }, 200);
   } else {
     rootElement.classList.remove("theme-transition");
   }
@@ -37,14 +37,10 @@ export function applyTheme(theme: Theme, animate = false): void {
     rootElement.classList.add("dark");
     rootElement.setAttribute("data-theme", "dim");
     rootElement.style.colorScheme = "dark";
-    document.body.classList.add("theme-dark");
-    document.body.classList.remove("theme-light");
   } else {
     rootElement.classList.remove("dark");
     rootElement.setAttribute("data-theme", "retro");
     rootElement.style.colorScheme = "light";
-    document.body.classList.remove("theme-dark");
-    document.body.classList.add("theme-light");
   }
 
   if (typeof localStorage !== "undefined") {

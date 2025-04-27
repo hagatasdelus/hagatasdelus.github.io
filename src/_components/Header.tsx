@@ -9,23 +9,23 @@ export default function Header() {
     { name: "Misc", href: "/misc/" },
   ];
 
+  const linkStyle =
+    "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
+
   return (
-    <header className="">
+    <header>
       <div className="container mx-auto px-8 md:px-12 lg:px-16">
-        <nav className="flex justify-between items-center h-16">
+        <nav className="grid grid-cols-[auto_1fr] items-center h-16">
           <h1 className="text-2xl font-bold">
-            <a
-              href="/"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
-            >
+            <a href="/" className={linkStyle}>
               {SITE_TITLE}
             </a>
           </h1>
 
-          <div className="flex items-center space-x-4">
+          <div className="justify-self-end flex items-center space-x-4">
             <div
               id="theme-toggle"
-              className="cursor-pointer p-2 text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+              className={`cursor-pointer p-2 ${linkStyle}`}
               aria-label="テーマ切替"
             >
               <span className="relative inline-block w-6 h-6">
@@ -41,18 +41,23 @@ export default function Header() {
               </span>
             </div>
 
-            <div className="dropdown dropdown-end md:hidden">
-              <div
-                tabIndex={0}
-                role="button"
-                className="p-2 cursor-pointer text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
+            <div className="md:hidden relative p-2">
+              <input
+                type="checkbox"
+                id="menu-toggle"
+                className="hidden peer"
+                aria-hidden="true"
+              />
+
+              <label
+                htmlFor="menu-toggle"
+                className={`cursor-pointer ${linkStyle}`}
               >
                 <svg
                   className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     strokeLinecap="round"
@@ -61,20 +66,25 @@ export default function Header() {
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
-              </div>
+              </label>
+
+              <label
+                htmlFor="menu-toggle"
+                className="fixed inset-0 z-10 hidden peer-checked:block"
+                aria-hidden="true"
+              />
 
               <ul
-                tabIndex={0}
-                className="dropdown-content bg-base-100 dark:bg-base-300 rounded-lg shadow-lg mt-3 p-2 w-32 z-[1]"
+                className="absolute right-0 top-full p-2 w-32 z-20 bg-base-100 dark:bg-base-300 rounded-lg shadow-lg hidden peer-checked:block"
+                role="menu"
               >
                 {navigation.map((item) => (
                   <li key={item.name} className="py-2 px-4">
-                    <a
-                      href={item.href}
-                      className="block w-full text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
-                    >
-                      {item.name}
-                    </a>
+                    <label htmlFor="menu-toggle" className="cursor-pointer">
+                      <a href={item.href} className={linkStyle}>
+                        {item.name}
+                      </a>
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -83,10 +93,7 @@ export default function Header() {
             <ul className="hidden md:flex space-x-4">
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent transition-colors"
-                  >
+                  <a href={item.href} className={linkStyle}>
                     {item.name}
                   </a>
                 </li>

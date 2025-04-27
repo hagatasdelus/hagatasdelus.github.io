@@ -6,7 +6,7 @@ export default ({ title, children }: Lume.Data) => {
   // helpers: Lume.Helpers
   return (
     <>
-      <html lang="en">
+      <html lang="ja">
         <head>
           <meta
             name="viewport"
@@ -18,9 +18,9 @@ export default ({ title, children }: Lume.Data) => {
           <title>{title || SITE_TITLE}</title>
           <meta name="description" content={SITE_DESCRIPTION} />
         </head>
-        <body className="flex flex-col min-h-screen">
+        <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />
-          <div className="main-container container mx-auto px-12 md:px-16 lg:px-20 flex-grow flex flex-col">
+          <div className="container mx-auto px-4 md:px-8 lg:px-12">
             {children}
           </div>
           <Footer />

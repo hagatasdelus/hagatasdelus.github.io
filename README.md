@@ -22,6 +22,7 @@ deno task serve
 
 - OGP
 - highlight by theme
+- Search
 
 </div>
 

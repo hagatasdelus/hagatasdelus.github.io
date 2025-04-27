@@ -42,8 +42,6 @@ const toggleTheme = () => {
 };
 
 export const initTheme = () => {
-  updateThemeIcon();
-
   const themeToggle = document.getElementById("theme-toggle");
   if (themeToggle) {
     themeToggle.addEventListener("click", toggleTheme);
@@ -76,5 +74,6 @@ export const watchSystemTheme = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
+  updateThemeIcon();
   watchSystemTheme();
 });

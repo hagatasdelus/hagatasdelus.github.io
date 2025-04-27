@@ -32,42 +32,44 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
         </head>
         <body className="flex flex-col min-h-screen">
           <Header />
-          <div className="main-container container max-w-4xl mx-auto px-2 flex-grow flex flex-col">
-            <article className="my-8">
-              {title && (
-                <div className="mb-6">
-                  <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                    {title}
-                  </h1>
+          <main className="flex-grow w-full mx-auto">
+            <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+              <article className="my-8">
+                {title && (
+                  <div className="mb-6">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-4 break-words">
+                      {title}
+                    </h1>
 
-                  <div className="flex flex-wrap items-center text-gray-500 dark:text-gray-400">
-                    {formattedDate && (
-                      <time dateTime={pubDate.toString()} className="mr-4">
-                        {formattedDate}
-                      </time>
-                    )}
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-500 dark:text-gray-400">
+                      {formattedDate && (
+                        <time dateTime={pubDate.toString()}>
+                          {formattedDate}
+                        </time>
+                      )}
 
-                    {displayTags.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {displayTags.map((tag: string) => (
-                          <span
-                            key={tag}
-                            className="border border-current opacity-70 px-2 py-1 rounded-md text-xs transition-colors duration-300"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                      {displayTags.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {displayTags.map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="border border-current opacity-70 px-2 py-1 rounded-md text-xs duration-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              <div className="prose prose-lg max-w-none dark:prose-invert">
-                {children}
-              </div>
-            </article>
-          </div>
+                <div className="prose prose-lg max-w-none dark:prose-invert">
+                  {children}
+                </div>
+              </article>
+            </div>
+          </main>
           <Footer />
         </body>
       </html>

@@ -10,7 +10,7 @@ export const metas = {
 export default function Home({}: Lume.Data) {
   // helpers: Lume.Helpers
   return (
-    <div className="flex justify-center items-center w-full h-full min-h-[calc(100vh-var(--header-height)-var(--footer-height))]">
+    <div className="grid place-items-center w-full h-full">
       <h3 className="text-3xl">Hi! I'm Hagata</h3>
     </div>
   );

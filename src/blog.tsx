@@ -53,22 +53,17 @@ export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
 
   return (
     <>
-      <div className="flex flex-col w-full max-w-4xl mx-auto px-2">
-        <h1 className="text-2xl md:text-3xl font-bold mb-10 pl-4">
-          Blog Archive
-        </h1>
-        {/* <div className="search mb-4" id="search" /> */}
+      <div className="w-full max-w-4xl mx-auto px-2">
+        <div className="search my-8" id="search" />
 
-        <div className="flex flex-col">
+        <div>
           {postsByYear.map((yearGroup, groupIndex) => (
             <div key={groupIndex}>
-              <div className="flex items-center mt-8 mb-6 first:mt-0">
-                <div className="flex-none pr-4">
-                  <h2 className="text-accent dark:text-accent text-2xl font-bold transition-colors duration-300">
-                    {yearGroup.year}
-                  </h2>
-                </div>
-                <div className="flex-grow h-px bg-accent/30 dark:bg-accent/30 transition-colors duration-300"></div>
+              <div className="grid grid-cols-[auto_1fr] items-center gap-4 mt-8 mb-6 first:mt-0">
+                <h2 className="text-accent dark:text-accent text-2xl font-bold">
+                  {yearGroup.year}
+                </h2>
+                <div className="h-px bg-accent/30 dark:bg-accent/30"></div>
               </div>
 
               {yearGroup.posts.map((post, postIndex) => (
