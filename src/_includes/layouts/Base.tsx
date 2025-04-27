@@ -20,7 +20,7 @@ export default ({ title, children }: Lume.Data) => {
         </head>
         <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />
-          <div className="main-container container mx-auto px-4 md:px-8 lg:px-12">
+          <div className="container mx-auto px-4 md:px-8 lg:px-12">
             {children}
           </div>
           <Footer />

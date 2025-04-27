@@ -14,45 +14,21 @@ body {
 }
 
 html {
-  overflow-y: scroll;
   transition: none;
-}
-
-:root {
-  --header-height: 4rem;
-  --footer-height: 5.25rem;
-}
-
-.main-container {
-  min-height: calc(100vh - var(--header-height) - var(--footer-height));
-  display: flex;
-  flex-direction: column;
-}
-
-.transition-nav-border {
-  transition: all ease-in-out 0.3s;
 }
 
 .theme-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
 }
 
 #theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer !important;
+  cursor: pointer;
   position: relative;
-}
-
-#sun-icon,
-#moon-icon {
-  width: 24px;
-  height: 24px;
-  transition: opacity 0.3s ease;
 }
 
 #theme-toggle:hover .theme-icon {
@@ -65,7 +41,7 @@ html {
 
 #sun-icon.hidden,
 #moon-icon.hidden {
-  display: none !important;
+  display: none;
 }
 
 html.theme-transition {
