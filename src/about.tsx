@@ -21,7 +21,7 @@ export default function () {
           alt="hagata"
           className="mx-auto h-48 w-48 rounded-full md:mb-18 mt-24 md:mt-6"
         />
-        <main className="mt-4">
+        <main className="mt-4 text-left">
           <p>こんにちは、Hagataです。</p>
           <p>
             現在は京都の大学でコンピュータサイエンスを学んでいます。
