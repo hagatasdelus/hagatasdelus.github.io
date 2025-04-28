@@ -1,0 +1,9 @@
+{
+  "plugins": {},
+  "filters": {},
+  "rules": {
+    "preset-ja-technial-writing": false,
+    "spellcheck-tech-word": false,
+    "preset-japanese": true
+  }
+}

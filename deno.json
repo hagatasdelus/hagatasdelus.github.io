@@ -3,7 +3,9 @@
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
     "serve": "deno task lume -s",
-    "cms": "deno task lume cms"
+    "lint": "deno run -A npm:textlint",
+    "lint-fix": "deno task lint --fix",
+    "lint-dry": "deno task lint --dry-run"
   },
   "imports": {
     "lume/": "https://deno.land/x/lume@v2.5.1/",
