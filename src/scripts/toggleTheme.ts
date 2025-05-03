@@ -4,7 +4,8 @@ export function updateThemeIcon(): void {
   if (!document.documentElement) {
     return;
   }
-  const isDark = document.documentElement.classList.contains("dark");
+  const currentDataTheme = document.documentElement.getAttribute("data-theme");
+  const isDark = currentDataTheme === "dim";
 
   const sunIcon = document.getElementById("sun-icon");
   const moonIcon = document.getElementById("moon-icon");
@@ -57,13 +58,13 @@ export const watchSystemTheme = () => {
 
   const handleChange = (e: MediaQueryListEvent) => {
     if (localStorage.getItem("theme") === null) {
-      let newTheme: Theme;
-      if (e.matches) {
-        newTheme = "dark";
-      } else {
-        newTheme = "light";
-      }
-
+      const newTheme: Theme = (() => {
+        if (e.matches) {
+          return "dark";
+        } else {
+          return "light";
+        }
+      })();
       applyTheme(newTheme, true);
       updateThemeIcon();
     }

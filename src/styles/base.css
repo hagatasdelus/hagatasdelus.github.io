@@ -9,12 +9,9 @@
 
 body {
   font-family: "Sawarabi Gothic", sans-serif;
-  font-weight: 400;
   font-style: normal;
-}
-
-html {
-  transition: none;
+  background: oklch(var(--b1));
+  color: oklch(var(--bc));
 }
 
 .theme-icon {
@@ -44,7 +41,7 @@ html {
   display: none;
 }
 
-html.theme-transition {
+body.theme-transition {
   transition: all 0.2s ease-in-out;
   /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
     border-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
