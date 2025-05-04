@@ -14,7 +14,7 @@ const linkStyle =
 export default function Header() {
   return (
     <header>
-      <div className="container mx-auto px-8 md:px-12 lg:px-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 max-w-5xl">
         <nav className="grid grid-cols-[auto_1fr] items-center h-16">
           <h1 className="text-2xl font-bold">
             <a href="/" className={linkStyle}>
