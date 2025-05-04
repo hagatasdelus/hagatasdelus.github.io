@@ -4,7 +4,7 @@ import typography from "npm:@tailwindcss/typography";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{html,md,mdx,js,jsx,ts,tsx}"],
-  darkMode: "class",
+  darkMode: ['selector', '[data-theme="dim"]'],
   plugins: [daisyui, typography],
   daisyui: {
     themes: ["retro", "dim"],
@@ -17,13 +17,11 @@ export default {
           css: {
             color: "oklch(var(--bc))",
             a: {
-              textDecorationLine: "underline",
-              textDecorationOffset: "0.25em",
-              textDecorationColor: "oklch(var(--s))",
+              textDecorationOffset: "4px",
               "&:hover": {
                 color: "oklch(var(--s))",
-                textDecorationThickness: "0.125em",
-                transition: "all .3s ease-in-out",
+                textDecorationThickness: "2px",
+                transition: "all .2s ease-in-out",
               },
             },
           },
