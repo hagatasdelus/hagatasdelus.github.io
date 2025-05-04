@@ -1,17 +1,17 @@
 import { SITE_TITLE } from "../consts.ts";
 import { SunIcon, MoonIcon } from "./ThemeIcons.tsx";
 
+const navigation = [
+  { name: "About", href: "/about/" },
+  { name: "Info", href: "/info/" },
+  { name: "Blog", href: "/blog/" },
+  { name: "Misc", href: "/misc/" },
+];
+
+const linkStyle =
+  "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
+
 export default function Header() {
-  const navigation = [
-    { name: "About", href: "/about/" },
-    { name: "Info", href: "/info/" },
-    { name: "Blog", href: "/blog/" },
-    { name: "Misc", href: "/misc/" },
-  ];
-
-  const linkStyle =
-    "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
-
   return (
     <header>
       <div className="container mx-auto px-8 md:px-12 lg:px-16">
