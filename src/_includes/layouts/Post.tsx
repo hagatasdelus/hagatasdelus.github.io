@@ -33,7 +33,7 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
         <body className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow w-full mx-auto">
-            <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="container max-w-4xl mx-auto px-4">
               <article className="my-8">
                 {title && (
                   <div className="mb-6">
@@ -41,7 +41,7 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
                       {title}
                     </h1>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-500 dark:text-gray-400">
+                    <div className="flex flex-row gap-4 text-gray-500 dark:text-gray-400">
                       {formattedDate && (
                         <time dateTime={pubDate.toString()}>
                           {formattedDate}
@@ -64,7 +64,7 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
                   </div>
                 )}
 
-                <div className="prose prose-lg max-w-none dark:prose-invert">
+                <div className="prose md:prose-lg max-w-none dark:prose-invert">
                   {children}
                 </div>
               </article>
