@@ -14,66 +14,70 @@ export default function () {
     {
       name: "Lume",
       license: "MIT License",
-      url: "https://lume.land/",
+      url: "https://github.com/lumeland/lume",
     },
     {
       name: "Tailwind CSS",
       license: "MIT License",
-      url: "https://tailwindcss.com/",
+      url: "https://github.com/tailwindlabs/tailwindcss",
     },
     {
       name: "daisyUI",
       license: "MIT License",
-      url: "https://daisyui.com/",
+      url: "https://github.com/saadeghi/daisyui",
     },
   ];
 
   return (
     <>
-      <div className="prose max-w-none">
-        <h2 className="text-xl md:text-2xl text-left my-2">ライセンス</h2>
-        <p>
-          このブログの記事は、
-          <a
-            rel="license"
-            href="http://creativecommons.org/licenses/by-sa/4.0/deed.ja"
-          >
-            クリエイティブ・コモンズ 表示-継承 4.0 国際 ライセンス
-          </a>
-          の下に提供されています。
-        </p>
-        <a
-          href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
-          rel="license"
-        >
-          <img
-            alt="クリエイティブ・コモンズ・ライセンス"
-            src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-          />
-        </a>
-
-        <h3 className="text-xl text-left my-4 mt-8">サイトの詳細</h3>
-        <p className="mb-4">このサイトは以下の技術で構築されています。</p>
-
-        <div className="ml-2">
-          {techs.map((tech) => (
-            <div key={tech.name} className="mb-4">
-              <h4 className="text-lg font-semibold mb-1 text-accent">
-                {tech.name}
-                <span className="text-sm font-normal ml-2 text-gray-500 dark:text-gray-400">
-                  {tech.license}
-                </span>
-              </h4>
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="mx-auto text-left">
+          <div className="prose md:prose-lg max-w-none md:mx-6">
+            <h3 className="text-xl md:text-2xl mx-auto my-2">ライセンス</h3>
+            <p>
+              このブログの記事は、
               <a
-                href={tech.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-secondary text-sm hover:text-secondary-focus"
+                rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/deed.ja"
+                className="underline-offset-4"
               >
-                公式サイト →
+                クリエイティブ・コモンズ 表示-継承 4.0 国際 ライセンス
               </a>
+              の下に提供されています。
+            </p>
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
+              rel="license"
+            >
+              <img
+                alt="クリエイティブ・コモンズ・ライセンス"
+                src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
+              />
+            </a>
+
+            <h3 className="text-xl text-left my-4 mt-8">サイトの詳細</h3>
+            <p className="mb-4">このサイトは以下の技術で構築されています。</p>
+
+            <div className="ml-2">
+              {techs.map((tech) => (
+                <div key={tech.name} className="mb-4">
+                  <h4 className="text-lg font-semibold mb-1 text-accent">
+                    <a
+                      href={tech.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-4"
+                    >
+                      {tech.name}
+                    </a>
+                    <span className="text-sm font-normal ml-2 text-gray-500 dark:text-gray-400">
+                      {tech.license}
+                    </span>
+                  </h4>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>

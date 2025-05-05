@@ -53,8 +53,8 @@ export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
 
   return (
     <>
-      <div className="w-full max-w-4xl mx-auto px-2">
-        <div className="search my-8" id="search" />
+      <div className="max-w-2xl mx-auto px-4">
+        {/* <div className="search my-8" id="search" /> */}
 
         <div>
           {postsByYear.map((yearGroup, groupIndex) => (
