@@ -7,6 +7,10 @@
 @plugin "tailwindcss/typography";
 @plugin "daisyui";
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Sawarabi Gothic", sans-serif;
   font-style: normal;
