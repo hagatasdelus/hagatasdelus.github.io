@@ -1,5 +1,6 @@
 import { SITE_DESCRIPTION } from "./consts.ts";
 import PostList from "./_components/PostList.tsx";
+import Search from "./_components/Search.tsx";
 
 export const layout = "layouts/Base.tsx";
 export const title = "Blog";
@@ -54,8 +55,7 @@ export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
   return (
     <>
       <div className="max-w-2xl mx-auto px-4">
-        {/* <div className="search my-8" id="search" /> */}
-
+        <Search />
         <div>
           {postsByYear.map((yearGroup, groupIndex) => (
             <div key={groupIndex}>
@@ -63,7 +63,7 @@ export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
                 <h2 className="text-accent dark:text-accent text-2xl font-bold">
                   {yearGroup.year}
                 </h2>
-                <div className="h-px bg-accent/30 dark:bg-accent/30"></div>
+                <div className="h-px bg-accent/30 dark:bg-accent/30" />
               </div>
 
               {yearGroup.posts.map((post, postIndex) => (
