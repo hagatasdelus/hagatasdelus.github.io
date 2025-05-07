@@ -31,6 +31,7 @@ export default function () {
   return (
     <>
       <div className="max-w-4xl mx-auto px-4">
+        <h1 className="prose md:prose-lg hidden">Info</h1>
         <div className="mx-auto text-left">
           <div className="prose md:prose-lg max-w-none md:mx-6">
             <h3 className="text-xl md:text-2xl mx-auto my-2">ライセンス</h3>

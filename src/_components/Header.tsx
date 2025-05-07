@@ -16,11 +16,11 @@ export default function Header() {
     <header>
       <div className="container mx-auto px-4 md:px-8 lg:px-12 max-w-5xl">
         <nav className="grid grid-cols-[auto_1fr] items-center h-16">
-          <h1 className="text-2xl font-bold">
+          <div className="text-2xl font-bold">
             <a href="/" className={linkStyle}>
               {SITE_TITLE}
             </a>
-          </h1>
+          </div>
 
           <div className="justify-self-end flex items-center space-x-4">
             <div

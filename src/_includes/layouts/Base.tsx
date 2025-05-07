@@ -1,6 +1,6 @@
 import Header from "../../_components/Header.tsx";
 import Footer from "../../_components/Footer.tsx";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts.ts";
+import { SITE_DESCRIPTION } from "../../consts.ts";
 
 export default ({ title, children }: Lume.Data) => {
   // helpers: Lume.Helpers
@@ -8,15 +8,15 @@ export default ({ title, children }: Lume.Data) => {
     <>
       <html lang="ja">
         <head>
+          <title>{title}</title>
+          <link rel="stylesheet" href="/styles/base.css" />
+          <meta name="description" content={SITE_DESCRIPTION} />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <link rel="stylesheet" href="/styles/base.css" />
           <script src="/scripts/themeInit.js"></script>
           <script type="module" src="/scripts/toggleTheme.js"></script>
-          <title>{title || SITE_TITLE}</title>
-          <meta name="description" content={SITE_DESCRIPTION} />
         </head>
         <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />

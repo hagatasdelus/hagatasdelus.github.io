@@ -1,10 +1,12 @@
 import Header from "../../_components/Header.tsx";
 import Footer from "../../_components/Footer.tsx";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts.ts";
+import { SITE_DESCRIPTION } from "../../consts.ts";
 import { format, parse } from "date-fns";
 import { ja } from "date-fns/locale";
 
-export default function Post({ title, pubDate, tags, children }: Lume.Data) {
+export default function Post(data: Lume.Data) {
+  // helpers: Lume.Helpers
+  const { title, children, pubDate, tags } = data;
   const parsedDate = (() => {
     if (typeof pubDate === "undefined") {
       return "";
@@ -20,15 +22,16 @@ export default function Post({ title, pubDate, tags, children }: Lume.Data) {
     <>
       <html lang="ja">
         <head>
+          <meta charSet="UTF-8" />
+          <title>{title}</title>
+          <link rel="stylesheet" href="/styles/base.css" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <link rel="stylesheet" href="/styles/base.css" />
+          <meta name="description" content={SITE_DESCRIPTION} />
           <script src="/scripts/themeInit.js"></script>
           <script type="module" src="/scripts/toggleTheme.js"></script>
-          <title>{title || SITE_TITLE}</title>
-          <meta name="description" content={SITE_DESCRIPTION} />
         </head>
         <body className="flex flex-col min-h-screen">
           <Header />

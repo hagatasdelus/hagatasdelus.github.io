@@ -12,10 +12,10 @@ export const metas = {
 export default function () {
   return (
     <>
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="prose md:prose-lg text-2xl md:text-3xl text-left max-w-none md:mx-6 my-2">
-          その他
-        </h2>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="prose md:prose-lg mx-auto md:mx-6">
+          <h1 className="text-2xl md:text-4xl font-bold mb-8">MISC</h1>
+        </div>
         <div className="prose md:prose-lg text-center mx-auto">
           <div className="grid grid-cols-2 justify-items-center gap-6 mt-6">
             <img
