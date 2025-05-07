@@ -40,12 +40,10 @@ const site = lume({
 site.use(jsx());
 site.use(mdx());
 site.use(base_path());
-site.use(metas());
 
 site.use(minify_html());
 
-site.use(esbuild({ options: { minify: false } }));
-site.use(pagefind());
+site.use(esbuild());
 site.use(sitemap());
 
 site.use(
@@ -93,6 +91,7 @@ site.use(
   })
 );
 
+site.use(metas());
 site.use(
   remark({
     remarkPlugins: [remarkBreaks],
@@ -114,7 +113,9 @@ site.use(footnote());
 site.use(tailwindcss({ options: tailwindOptions }));
 site.use(postcss());
 
-site.ignore("README.md", "node_modules");
+site.use(pagefind());
+
+site.ignore("README.md", "node_modules", "_deno.lock");
 
 site.copy("./images", "images");
 site.copy("./public/assets/icons", "icons");

@@ -8,7 +8,7 @@
     "lint-dry": "deno task lint --dry-run"
   },
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.5.1/",
+    "lume/": "https://deno.land/x/lume@v2.5.3/",
     "date-fns": "npm:date-fns"
   },
   "compilerOptions": {
