@@ -1,9 +1,12 @@
+import { SITE_DESCRIPTION } from "../../consts.ts";
+
 export const tags = ["diary"];
 
 export const layout = "layouts/Post.tsx";
 export const templateEngine = "md";
 export const metas = {
-  description: "=description",
+  description: SITE_DESCRIPTION,
+  robots: "noindex",
 };
 
 export function url(page) {
