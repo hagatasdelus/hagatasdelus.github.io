@@ -1,5 +1,6 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx.ts";
+import gzip from "lume/plugins/gzip.ts";
 import pagefind from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import postcss from "lume/plugins/postcss.ts";
@@ -42,6 +43,7 @@ site.use(mdx());
 site.use(base_path());
 
 site.use(minify_html());
+site.use(gzip());
 
 site.use(esbuild());
 site.use(sitemap());
