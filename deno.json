@@ -2,23 +2,26 @@
   "tasks": {
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
-    "serve": "deno task lume -s",
-    "lint": "deno run -A npm:textlint",
-    "lint-fix": "deno task lint --fix",
-    "lint-dry": "deno task lint --dry-run"
+    "serve": "deno task lume -s"
   },
   "imports": {
     "lume/": "https://deno.land/x/lume@v2.5.3/",
     "date-fns": "npm:date-fns"
   },
   "compilerOptions": {
-    "types": ["lume/types.ts"],
+    "types": [
+      "lume/types.ts"
+    ],
     "jsx": "react-jsx",
     "jsxImportSource": "npm:react",
     "jsxImportSourceTypes": "npm:@types/react"
   },
   "nodeModulesDir": "auto",
   "fmt": {
-    "exclude": ["_site", "_cache", "node_modules"]
+    "exclude": [
+      "_site",
+      "_cache",
+      "node_modules"
+    ]
   }
 }
