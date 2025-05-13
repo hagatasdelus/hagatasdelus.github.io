@@ -1,26 +1,26 @@
 import { SITE_TITLE } from "../consts.ts";
 import { SunIcon, MoonIcon } from "./ThemeIcons.tsx";
 
+const navigation = [
+  { name: "About", href: "/about/" },
+  { name: "Info", href: "/info/" },
+  { name: "Blog", href: "/blog/" },
+  { name: "Misc", href: "/misc/" },
+];
+
+const linkStyle =
+  "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
+
 export default function Header() {
-  const navigation = [
-    { name: "About", href: "/about/" },
-    { name: "Info", href: "/info/" },
-    { name: "Blog", href: "/blog/" },
-    { name: "Misc", href: "/misc/" },
-  ];
-
-  const linkStyle =
-    "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
-
   return (
     <header>
-      <div className="container mx-auto px-8 md:px-12 lg:px-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 max-w-5xl">
         <nav className="grid grid-cols-[auto_1fr] items-center h-16">
-          <h1 className="text-2xl font-bold">
+          <div className="text-2xl font-bold">
             <a href="/" className={linkStyle}>
               {SITE_TITLE}
             </a>
-          </h1>
+          </div>
 
           <div className="justify-self-end flex items-center space-x-4">
             <div

@@ -23,24 +23,19 @@ export function getThemePreference(): Theme {
 
 export function applyTheme(theme: Theme, animate = false) {
   const rootElement = document.documentElement;
+  const bodyElement = document.body;
 
-  if (animate) {
-    rootElement.classList.add("theme-transition");
+  if (animate && bodyElement) {
+    bodyElement.classList.add("theme-transition");
     setTimeout(() => {
-      rootElement.classList.remove("theme-transition");
+        bodyElement.classList.remove("theme-transition");
     }, 200);
-  } else {
-    rootElement.classList.remove("theme-transition");
   }
 
   if (theme === "dark") {
-    rootElement.classList.add("dark");
     rootElement.setAttribute("data-theme", "dim");
-    rootElement.style.colorScheme = "dark";
   } else {
-    rootElement.classList.remove("dark");
     rootElement.setAttribute("data-theme", "retro");
-    rootElement.style.colorScheme = "light";
   }
 
   if (typeof localStorage !== "undefined") {

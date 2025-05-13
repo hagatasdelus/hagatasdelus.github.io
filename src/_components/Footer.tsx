@@ -1,30 +1,34 @@
 import SocialList from "./SocialList.tsx";
 
+const currentYear = new Date().getFullYear();
+
 export default function Footer() {
   return (
-    <footer className="border-t-2 border-accent text-gray-500 dark:text-gray-300 text-xs px-8 md:px-12 lg:px-16 pt-2 w-full mt-auto">
-      <div className="container mx-auto">
-        <div className="text-right">
-          <p>
-            <a
-              href="/info"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"
-            >
-              CC BY-SA 4.0
-            </a>
-            <span>&nbsp;2025-PRESENT &copy;&nbsp;</span>
-            <a
-              href="/about"
-              className="text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"
-            >
-              Hagata
-            </a>
-            <span>. All rights reserved.</span>
-          </p>
+    <footer>
+      <div className="mx-6">
+        <div className="border-t-2 border-accent">
+          <div className="container mx-auto my-1.5 px-4 md:px-8 lg:px-12 max-w-5xl">
+            <div className="flex justify-end h-16 items-center">
+              <section className="text-right">
+                <div className="text-xs text-gray-500 dark:text-gray-300 mb-3">
+                  <p>
+                    <span>Copyright&nbsp;&copy;&nbsp;{currentYear}&nbsp;</span>
+                    <a
+                      href="/about"
+                      className="hover:text-accent dark:hover:text-accent underline decoration-dashed underline-offset-4"
+                    >
+                      Hagata
+                    </a>
+                    <span>.&nbsp;All rights reserved.</span>
+                  </p>
+                </div>
+                <ul className="flex justify-end list-none space-x-4 mt-1">
+                  <SocialList />
+                </ul>
+              </section>
+            </div>
+          </div>
         </div>
-        <ul className="flex justify-end list-none p-0 space-x-4">
-          <SocialList />
-        </ul>
       </div>
     </footer>
   );

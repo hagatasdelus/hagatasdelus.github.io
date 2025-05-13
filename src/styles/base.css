@@ -7,46 +7,54 @@
 @plugin "tailwindcss/typography";
 @plugin "daisyui";
 
-body {
-  font-family: "Sawarabi Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+[data-theme="dim"] {
+    --pagefind-ui-text: oklch(var(--bc));
+    --pagefind-ui-background: oklch(var(--b1));
+    --pagefind-ui-border: oklch(var(--b2));
+    --pagefind-ui-tag: oklch(var(--b2));
 }
 
 html {
-  transition: none;
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: "Sawarabi Gothic", sans-serif;
+    font-style: normal;
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
 }
 
 .theme-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
 }
 
 #theme-toggle:hover .theme-icon {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 #theme-toggle:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 #sun-icon.hidden,
 #moon-icon.hidden {
-  display: none;
+    display: none;
 }
 
-html.theme-transition {
-  transition: all 0.2s ease-in-out;
-  /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+body.theme-transition {
+    transition: all 0.2s ease-in-out;
+    /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
     border-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
     fill 0.2s ease-in-out;  */
 }
