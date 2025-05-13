@@ -2,7 +2,7 @@
 
 # Hagata no Nedoko
 
-(my web site)
+（My Web Site）
 
 </div>
 
@@ -18,11 +18,10 @@ deno task serve
 
 <div>
 
-## Todo
+## ToDo
 
 - OGP
 - highlight by theme
-- Search
 
 </div>
 
