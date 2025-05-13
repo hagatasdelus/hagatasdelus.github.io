@@ -30,7 +30,7 @@ import {
 const highlighter = await createHighlighter({
   themes: ["everforest-dark"],
   // themes: ["everforest-light", "everforest-dark"],
-  langs: ["py", "ts", "js", "sh", "md", "lua", "go", "lisp"],
+  langs: ["html", "py", "ts", "js", "sh", "md", "lua", "go", "lisp"],
 });
 
 const site = lume({
