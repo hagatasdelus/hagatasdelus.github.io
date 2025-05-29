@@ -9,19 +9,13 @@
     "date-fns": "npm:date-fns"
   },
   "compilerOptions": {
-    "types": [
-      "lume/types.ts"
-    ],
+    "types": ["lume/types.ts"],
     "jsx": "react-jsx",
     "jsxImportSource": "npm:react",
     "jsxImportSourceTypes": "npm:@types/react"
   },
   "nodeModulesDir": "auto",
   "fmt": {
-    "exclude": [
-      "_site",
-      "_cache",
-      "node_modules"
-    ]
+    "exclude": ["_site", "_cache", "node_modules"]
   }
 }
