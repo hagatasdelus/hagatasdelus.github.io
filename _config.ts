@@ -20,6 +20,7 @@ import { createHighlighter } from "npm:shiki";
 import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
 import { read } from "lume/core/utils/read.ts";
 import footnote from "./plugins/footnote.ts";
+import ogLinkCard from "./plugins/og_linkcard.ts";
 
 import tailwindOptions from "./tailwind.config.js";
 import {
@@ -62,7 +63,7 @@ site.use(
         format: "png",
       },
     ],
-  }),
+  })
 );
 
 site.use(
@@ -76,12 +77,12 @@ site.use(
           name: "NotoSansJPBlack",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Black.otf",
-            true,
+            true
           ),
         },
       ],
     },
-  }),
+  })
 );
 
 site.use(
@@ -96,7 +97,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(
@@ -111,13 +112,13 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(metas());
 site.use(
   remark({
-    remarkPlugins: [remarkBreaks],
+    remarkPlugins: [remarkBreaks, ogLinkCard],
     rehypePlugins: [
       [
         rehypeShikiFromHighlighter,
@@ -128,7 +129,7 @@ site.use(
         },
       ],
     ],
-  }),
+  })
 );
 
 site.use(footnote());
@@ -138,7 +139,7 @@ site.use(postcss());
 
 site.use(pagefind());
 
-site.ignore("README.md", "node_modules", "_deno.lock");
+site.ignore("README.md", "node_modules");
 
 site.copy("./images", "images");
 site.copy("./public/assets/icons", "icons");
