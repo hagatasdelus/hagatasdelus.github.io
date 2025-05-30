@@ -15,15 +15,13 @@
  */
 
 import * as v from "npm:valibot";
-import * as is from "jsr:@core/unknownutil";
+import { is } from "jsr:@core/unknownutil";
 import { DOMParser } from "jsr:@b-fuze/deno-dom";
 import { visit } from "npm:unist-util-visit";
 
-// ==============================================
-// 型定義
-// ==============================================
-
-// OGP情報のスキーマ定義
+/**
+ * OGP情報のスキーマ定義
+ */
 const OgpInfoSchema = v.object({
   url: v.optional(v.string()),
   title: v.optional(v.string()),
@@ -35,7 +33,9 @@ const OgpInfoSchema = v.object({
 
 export type OgpInfo = v.InferInput<typeof OgpInfoSchema>;
 
-// AST関連の型定義
+/**
+ * ASTノードの基本構造を表すインターフェース
+ */
 interface ASTNode {
   type: string;
   children?: ASTNode[];
@@ -43,13 +43,12 @@ interface ASTNode {
   url?: string; // linkノード用
 }
 
+/**
+ * 子ノードを持つAST親ノードのインターフェース
+ */
 interface ASTParent {
   children: ASTNode[];
 }
-
-// ==============================================
-// ユーティリティ関数
-// ==============================================
 
 /**
  * URL文字列を正規化する（Punycode対応）
@@ -76,10 +75,6 @@ export function extractUrls(text: string): string[] {
   return matches.map(normalizeUrl);
 }
 
-// ==============================================
-// OGP情報取得とHTML解析
-// ==============================================
-
 /**
  * 指定されたURLからOGP情報を取得する
  * @param url - 取得対象のURL
@@ -90,81 +85,54 @@ export async function fetchOgpInfo(
   url: string,
   timeout = 10000
 ): Promise<OgpInfo> {
-  const useCache = !is.isUndefined(Deno.env.get("NO_CACHE"));
-  const cacheKey = new Request(
-    `https://cache.local/ogp/${encodeURIComponent(url)}`
-  );
-
-  // キャッシュからの取得を試行
-  if (useCache) {
-    try {
-      const cache = await caches.open("fetchOgp");
-      const cachedResponse = await cache.match(cacheKey);
-      if (cachedResponse) {
-        const cachedData = await cachedResponse.json();
-        return v.parse(OgpInfoSchema, cachedData);
-      }
-    } catch (error) {
-      console.warn(`[fetchOgpInfo] Cache read error: ${error}`);
-    }
-  }
-
-  // リクエストヘッダーの設定
-  const headers: Record<string, string> = {
-    "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36",
-  };
-
-  // jsr.ioドメイン向けの特別なAcceptヘッダー
-  if (url.includes("jsr.io")) {
-    headers["Accept"] =
-      "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-  }
+  const useCache = is.Undefined(Deno.env.get("NO_CACHE"));
 
   try {
-    // タイムアウト付きfetch
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    const cache = await caches.open("fetchOgp");
+    const targetUrl = new URL(url);
 
-    try {
-      const response = await fetch(url, {
-        headers,
-        signal: controller.signal,
-      });
+    const response = await (async () => {
+      const cachedResponse = useCache ? await cache.match(url) : undefined;
+      const isJSR = targetUrl.origin.includes("jsr.io");
+      const baseHeaders = {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+      };
 
-      clearTimeout(timeoutId);
+      if (is.Undefined(cachedResponse)) {
+        const request = new Request(targetUrl);
+        const fetchResponse = await fetch(request, {
+          headers: isJSR
+            ? {
+                ...baseHeaders,
+                Accept:
+                  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              }
+            : baseHeaders,
+          signal: AbortSignal.timeout(timeout),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const html = await response.text();
-
-      // HTMLからOGP情報を抽出
-      const ogpInfo = parseOgpFromHtml(html, url);
-
-      // キャッシュに保存
-      if (useCache) {
-        try {
-          const cache = await caches.open("fetchOgp");
-          await cache.put(
-            cacheKey,
-            new Response(JSON.stringify(ogpInfo), {
-              headers: { "Content-Type": "application/json" },
-            })
-          );
-        } catch (error) {
-          console.warn(`[fetchOgpInfo] Cache write error: ${error}`);
+        if (!fetchResponse.ok) {
+          throw new Error(`HTTP error! status: ${fetchResponse.status}`);
         }
-      }
 
-      return ogpInfo;
-    } catch (fetchError) {
-      clearTimeout(timeoutId);
-      throw fetchError;
-    }
+        if (useCache) {
+          await cache.put(request, fetchResponse.clone());
+        }
+        return fetchResponse;
+      } else {
+        return cachedResponse;
+      }
+    })();
+
+    const html = await response.text();
+    const ogpInfo = parseOgpFromHtml(html, url);
+    return ogpInfo;
   } catch (error) {
-    console.error(`[fetchOgpInfo] Error fetching OGP info for ${url}:`, error);
+    console.error(
+      `[fetchOgpInfo] Error processing OGP info for ${url}:`,
+      error
+    );
     return { url, pageTitle: url }; // フォールバック
   }
 }
@@ -188,7 +156,8 @@ function parseOgpFromHtml(html: string, url: string): OgpInfo {
     }
 
     // titleタグから取得
-    ogpInfo.pageTitle = document.title || undefined;
+    const titleElement = document.querySelector("title");
+    ogpInfo.pageTitle = titleElement?.textContent?.trim() || undefined;
 
     // すべてのmetaタグを取得
     const metaTags = document.querySelectorAll("meta");
@@ -225,10 +194,6 @@ function parseOgpFromHtml(html: string, url: string): OgpInfo {
 
   return v.parse(OgpInfoSchema, ogpInfo);
 }
-
-// ==============================================
-// リンクカードHTML生成
-// ==============================================
 
 /**
  * OGP情報からリンクカードのHTMLを生成する
@@ -286,12 +251,6 @@ export function generateLinkCardHtml(ogpInfo: OgpInfo): string {
 </a>
   `.trim();
 }
-
-// ==============================================
-// OGPリンクカード用のremarkプラグイン
-// ==============================================
-// OGPリンクカード用のremarkプラグイン
-// ==============================================
 
 export default function ogLinkCard() {
   return async function transformer(tree: ASTNode, _file?: unknown) {
@@ -382,10 +341,6 @@ export default function ogLinkCard() {
     return tree;
   };
 }
-
-// ==============================================
-// Markdownコンテンツ処理
-// ==============================================
 
 /**
  * Markdownコンテンツ内の単独URLをリンクカードに変換する
