@@ -56,12 +56,7 @@ interface ASTParent {
  * @returns 正規化されたURL文字列
  */
 export function normalizeUrl(urlString: string): string {
-  try {
-    const url = new URL(urlString);
-    return url.toString();
-  } catch {
-    return urlString;
-  }
+  return URL.canParse(urlString) ? new URL(urlString).toString() : urlString;
 }
 
 /**
@@ -87,54 +82,46 @@ export async function fetchOgpInfo(
 ): Promise<OgpInfo> {
   const useCache = is.Undefined(Deno.env.get("NO_CACHE"));
 
-  try {
-    const cache = await caches.open("fetchOgp");
-    const targetUrl = new URL(url);
+  const cache = await caches.open("fetchOgp");
+  const targetUrl = new URL(url);
 
-    const response = await (async () => {
-      const cachedResponse = useCache ? await cache.match(url) : undefined;
-      const isJSR = targetUrl.origin.includes("jsr.io");
-      const baseHeaders = {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
-      };
+  const response = await (async () => {
+    const cachedResponse = useCache ? await cache.match(url) : undefined;
+    const isJSR = targetUrl.origin.includes("jsr.io");
+    const baseHeaders = {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+    };
 
-      if (is.Undefined(cachedResponse)) {
-        const request = new Request(targetUrl);
-        const fetchResponse = await fetch(request, {
-          headers: isJSR
-            ? {
-                ...baseHeaders,
-                Accept:
-                  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-              }
-            : baseHeaders,
-          signal: AbortSignal.timeout(timeout),
-        });
+    if (is.Undefined(cachedResponse)) {
+      const request = new Request(targetUrl);
+      const fetchResponse = await fetch(request, {
+        headers: isJSR
+          ? {
+              ...baseHeaders,
+              Accept:
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            }
+          : baseHeaders,
+        signal: AbortSignal.timeout(timeout),
+      });
 
-        if (!fetchResponse.ok) {
-          throw new Error(`HTTP error! status: ${fetchResponse.status}`);
-        }
-
-        if (useCache) {
-          await cache.put(request, fetchResponse.clone());
-        }
-        return fetchResponse;
-      } else {
-        return cachedResponse;
+      if (!fetchResponse.ok) {
+        throw new Error(`HTTP error! status: ${fetchResponse.status}`);
       }
-    })();
 
-    const html = await response.text();
-    const ogpInfo = parseOgpFromHtml(html, url);
-    return ogpInfo;
-  } catch (error) {
-    console.error(
-      `[fetchOgpInfo] Error processing OGP info for ${url}:`,
-      error
-    );
-    return { url, pageTitle: url }; // フォールバック
-  }
+      if (useCache) {
+        await cache.put(request, fetchResponse.clone());
+      }
+      return fetchResponse;
+    } else {
+      return cachedResponse;
+    }
+  })();
+
+  const html = await response.text();
+  const ogpInfo = parseOgpFromHtml(html, url);
+  return ogpInfo;
 }
 
 /**
@@ -146,50 +133,44 @@ export async function fetchOgpInfo(
 function parseOgpFromHtml(html: string, url: string): OgpInfo {
   const ogpInfo: Partial<OgpInfo> = { url };
 
-  try {
-    const parser = new DOMParser();
-    const document = parser.parseFromString(html, "text/html");
+  const parser = new DOMParser();
+  const document = parser.parseFromString(html, "text/html");
 
-    if (!document) {
-      console.warn(`[parseOgpFromHtml] Failed to parse HTML for ${url}`);
-      return v.parse(OgpInfoSchema, ogpInfo);
+  if (!document) {
+    console.warn(`[parseOgpFromHtml] Failed to parse HTML for ${url}`);
+    return v.parse(OgpInfoSchema, ogpInfo);
+  }
+
+  const titleElement = document.querySelector("title");
+  ogpInfo.pageTitle = titleElement?.textContent?.trim() || undefined;
+
+  const metaTags = document.querySelectorAll("meta");
+
+  for (const meta of metaTags) {
+    if (!meta.hasAttribute("property")) continue;
+
+    const property = meta.getAttribute("property");
+    const content = meta.getAttribute("content");
+
+    if (!property || !content) continue;
+
+    switch (property) {
+      case "og:title":
+        ogpInfo.title = content.trim();
+        break;
+      case "og:image":
+        ogpInfo.image = content.trim();
+        break;
+      case "og:site_name":
+        ogpInfo.siteName = content.trim();
+        break;
+      case "og:url":
+        ogpInfo.url = content.trim();
+        break;
+      case "og:description":
+        ogpInfo.description = content.trim();
+        break;
     }
-
-    // titleタグから取得
-    const titleElement = document.querySelector("title");
-    ogpInfo.pageTitle = titleElement?.textContent?.trim() || undefined;
-
-    // すべてのmetaタグを取得
-    const metaTags = document.querySelectorAll("meta");
-
-    for (const meta of metaTags) {
-      if (!meta.hasAttribute("property")) continue;
-
-      const property = meta.getAttribute("property");
-      const content = meta.getAttribute("content");
-
-      if (!property || !content) continue;
-
-      switch (property) {
-        case "og:title":
-          ogpInfo.title = content.trim();
-          break;
-        case "og:image":
-          ogpInfo.image = content.trim();
-          break;
-        case "og:site_name":
-          ogpInfo.siteName = content.trim();
-          break;
-        case "og:url":
-          ogpInfo.url = content.trim();
-          break;
-        case "og:description":
-          ogpInfo.description = content.trim();
-          break;
-      }
-    }
-  } catch (error) {
-    console.error(`[parseOgpFromHtml] Error parsing HTML for ${url}:`, error);
   }
 
   return v.parse(OgpInfoSchema, ogpInfo);
@@ -256,7 +237,6 @@ export default function ogLinkCard() {
   return async function transformer(tree: ASTNode, _file?: unknown) {
     const transformPromises: Promise<void>[] = [];
 
-    // unist-util-visitを使用してparagraphノードを走査
     visit(
       tree,
       "paragraph",
@@ -268,7 +248,6 @@ export default function ogLinkCard() {
         if (node.children?.length === 1 && parent && index !== undefined) {
           const child = node.children[0];
 
-          // textノードの処理（従来のロジック）
           if (child.type === "text") {
             const text = child.value?.trim() || "";
             const urls = extractUrls(text);
@@ -296,15 +275,12 @@ export default function ogLinkCard() {
 
               transformPromises.push(promise);
             }
-          }
-          // linkノードの処理（新規追加）
-          else if (child.type === "link" && child.children?.length === 1) {
+          } else if (child.type === "link" && child.children?.length === 1) {
             const linkChild = child.children[0];
             if (linkChild.type === "text" && linkChild.value) {
               const linkText = linkChild.value.trim();
-              const linkUrl = child.url; // linkノードのurl属性
+              const linkUrl = child.url;
 
-              // リンクテキストとURLが同じ場合（自動リンク化されたURL）
               if (
                 linkUrl &&
                 (linkText === linkUrl ||
@@ -335,7 +311,6 @@ export default function ogLinkCard() {
       }
     );
 
-    // すべての変換が完了するまで待機
     await Promise.all(transformPromises);
 
     return tree;
@@ -356,7 +331,6 @@ export async function processMarkdownForLinkCards(
   for (const line of lines) {
     const trimmedLine = line.trim();
 
-    // 単独のURLかどうかチェック（既にリンクカード化されていないもの）
     if (
       trimmedLine &&
       !trimmedLine.includes("<a") &&
@@ -369,7 +343,6 @@ export async function processMarkdownForLinkCards(
         urls.length === 1 &&
         (trimmedLine === urls[0] || normalizeUrl(trimmedLine) === urls[0])
       ) {
-        // 単独URLの場合、リンクカードに変換
         promises.push(
           fetchOgpInfo(urls[0])
             .then(generateLinkCardHtml)
@@ -378,14 +351,14 @@ export async function processMarkdownForLinkCards(
                 `[processMarkdownForLinkCards] Error processing ${urls[0]}:`,
                 error
               );
-              return line; // エラー時は元の行を返す
+              return line;
             })
         );
         continue;
       }
     }
 
-    promises.push(Promise.resolve(line)); // 元の行を保持
+    promises.push(Promise.resolve(line));
   }
 
   const processedLines = await Promise.all(promises);
