@@ -51,9 +51,12 @@ site.use(gzip());
 site.use(esbuild());
 site.use(sitemap());
 
+site.copy("./images", "images");
+site.copy("./public/assets/icons", "icons");
+
 site.use(
   favicon({
-    input: "./public/assets/icons/favicon.svg",
+    input: "/icons/favicon.svg",
     favicons: [
       { url: "/icons/favicon.ico", size: [48], rel: "icon", format: "ico" },
       {
@@ -140,8 +143,5 @@ site.use(postcss());
 site.use(pagefind());
 
 site.ignore("README.md", "node_modules");
-
-site.copy("./images", "images");
-site.copy("./public/assets/icons", "icons");
 
 export default site;
