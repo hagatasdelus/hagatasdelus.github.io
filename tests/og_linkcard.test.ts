@@ -1,5 +1,5 @@
 import { expect } from "jsr:@std/expect";
-import * as is from "jsr:@core/unknownutil";
+import { is } from "jsr:@core/unknownutil";
 import {
   type OgpInfo,
   fetchOgpInfo,
@@ -9,13 +9,10 @@ import {
   processMarkdownForLinkCards,
 } from "../plugins/og_linkcard.ts";
 
-// parseOgpFromHtmlは内部関数なので、fetchOgpInfoを通してテストする代わりに
-// モックHTMLを使用したテストを分離して作成
 async function parseOgpFromHtmlTest(
   html: string,
   url: string
 ): Promise<OgpInfo> {
-  // テスト用に一時的にfetchをモック
   const originalFetch = globalThis.fetch;
   globalThis.fetch = (() => {
     return Promise.resolve(
@@ -26,18 +23,20 @@ async function parseOgpFromHtmlTest(
     );
   }) as typeof fetch;
 
+  Deno.env.set("NO_CACHE", "true");
+
   try {
     const result = await fetchOgpInfo(url);
     return result;
   } finally {
     globalThis.fetch = originalFetch;
+    Deno.env.delete("NO_CACHE");
   }
 }
 
 Deno.test(
   "parseOgpFromHtml should extract OGP information from HTML using DOMParser",
   async () => {
-    // モックHTMLでテスト
     const mockHtml = `
     <!DOCTYPE html>
     <html>
@@ -77,7 +76,6 @@ Deno.test(
     );
 
     expect(ogpInfo.url).toBe("https://example.com");
-    // DOMParserは無効なHTMLでもある程度パースするため、titleがundefinedになることを確認
   }
 );
 
@@ -102,17 +100,14 @@ Deno.test(
 );
 
 Deno.test("useCacheフラグがNO_CACHE環境変数で正しく制御されること", () => {
-  // NO_CACHE未設定時
   Deno.env.delete("NO_CACHE");
-  const useCache1 = !is.isUndefined(Deno.env.get("NO_CACHE"));
-  expect(useCache1).toBe(false); // NO_CACHEが未設定の場合、キャッシュを使用しない
+  const useCache1 = !is.Undefined(Deno.env.get("NO_CACHE"));
+  expect(useCache1).toBe(false);
 
-  // NO_CACHE設定時
   Deno.env.set("NO_CACHE", "true");
-  const useCache2 = !is.isUndefined(Deno.env.get("NO_CACHE"));
-  expect(useCache2).toBe(true); // NO_CACHEが設定されている場合、キャッシュを使用する
+  const useCache2 = !is.Undefined(Deno.env.get("NO_CACHE"));
+  expect(useCache2).toBe(true);
 
-  // クリーンアップ
   Deno.env.delete("NO_CACHE");
 });
 
@@ -134,10 +129,10 @@ Deno.test("generateLinkCardHtml should create proper HTML structure", () => {
 
 Deno.test("extractUrls should find URLs in text", () => {
   const text =
-    "Check out https://example.com and https://github.com/ for more info";
+    "Check out https://example.com and https://example.org/ for more info";
   const urls = extractUrls(text);
 
-  expect(urls).toEqual(["https://example.com/", "https://github.com/"]);
+  expect(urls).toEqual(["https://example.com/", "https://example.org/"]);
 });
 
 Deno.test("normalizeUrl should handle valid URLs", () => {
@@ -186,7 +181,6 @@ Deno.test(
   async () => {
     const markdown = `# Test\n\nhttps://example.com\n\nSome text`;
 
-    // fetchをモック
     const originalFetch = globalThis.fetch;
     globalThis.fetch = (() => {
       return Promise.resolve(
@@ -210,7 +204,6 @@ Deno.test(
     }) as typeof fetch;
 
     try {
-      // モック関数でキャッシュを無効化
       Deno.env.set("NO_CACHE", "true");
 
       const result = await processMarkdownForLinkCards(markdown);
@@ -219,7 +212,6 @@ Deno.test(
       expect(result).toContain("<a");
       expect(result).toContain('href="https://example.com/"');
 
-      // 環境変数をクリア
       Deno.env.delete("NO_CACHE");
     } finally {
       globalThis.fetch = originalFetch;
@@ -228,21 +220,21 @@ Deno.test(
 );
 
 Deno.test("fetchOgpInfo should handle network errors gracefully", async () => {
-  // fetchをエラーが発生するようにモック
   const originalFetch = globalThis.fetch;
   globalThis.fetch = (() => {
     return Promise.reject(new Error("Network error"));
   }) as typeof fetch;
 
+  Deno.env.set("NO_CACHE", "true");
+
   try {
-    // タイムアウトを短くして迅速にテストを完了
     const result = await fetchOgpInfo("https://example.com", 100);
 
-    // エラー時のフォールバック値をテスト
     expect(result.url).toBe("https://example.com");
     expect(result.pageTitle).toBe("https://example.com");
   } finally {
     globalThis.fetch = originalFetch;
+    Deno.env.delete("NO_CACHE");
   }
 });
 
@@ -256,8 +248,8 @@ Deno.test(
     const html = generateLinkCardHtml(ogpInfo);
 
     expect(html).toContain('href="https://example.com"');
-    expect(html).toContain("No title"); // デフォルトタイトル
-    expect(html).toContain("example.com"); // hostNameがdescriptionに使用される
+    expect(html).toContain("No title");
+    expect(html).toContain("example.com");
   }
 );
 
@@ -272,5 +264,5 @@ Deno.test("normalizeUrl should handle invalid URLs", () => {
   const invalidUrl = "not-a-url";
   const normalized = normalizeUrl(invalidUrl);
 
-  expect(normalized).toBe("not-a-url"); // 無効なURLはそのまま返される
+  expect(normalized).toBe("not-a-url");
 });
