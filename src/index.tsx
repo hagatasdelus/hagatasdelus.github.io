@@ -1,4 +1,4 @@
-import { SITE_TITLE, SITE_DESCRIPTION } from "./consts.ts";
+import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 
 export const layout = "layouts/Base.tsx";
 export const title = SITE_TITLE;

@@ -1,9 +1,9 @@
-import { SITE_DESCRIPTION } from "./consts.ts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "./consts.ts";
 
 export const layout = "layouts/Base.tsx";
 export const templateEngine = "jsx";
 
-export const title = "Info";
+export const title = `Info - ${SITE_TITLE}`;
 export const metas = {
   title: "=title",
   description: SITE_DESCRIPTION,
