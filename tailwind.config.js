@@ -6,10 +6,10 @@ export default {
   content: [
     "./src/**/*.{html,md,mdx,js,jsx,ts,tsx}",
   ],
-  darkMode: ['selector', '[data-theme="dim"]'],
+  darkMode: ['selector', '[data-theme="sunset"]'],
   plugins: [daisyui, typography],
   daisyui: {
-    themes: ["retro", "dim"],
+    themes: ["retro", "sunset"],
   },
   safelist: [],
   theme: {

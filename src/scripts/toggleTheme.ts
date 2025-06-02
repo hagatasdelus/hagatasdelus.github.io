@@ -1,11 +1,11 @@
-import { getThemePreference, applyTheme, type Theme } from "./themeUtils.ts";
+import { applyTheme, getThemePreference, type Theme } from "./themeUtils.ts";
 
 export function updateThemeIcon(): void {
   if (!document.documentElement) {
     return;
   }
   const currentDataTheme = document.documentElement.getAttribute("data-theme");
-  const isDark = currentDataTheme === "dim";
+  const isDark = currentDataTheme === "sunset";
 
   const sunIcon = document.getElementById("sun-icon");
   const moonIcon = document.getElementById("moon-icon");
