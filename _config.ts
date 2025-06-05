@@ -66,7 +66,7 @@ site.use(
         format: "png",
       },
     ],
-  })
+  }),
 );
 
 site.use(
@@ -78,14 +78,25 @@ site.use(
       fonts: [
         {
           name: "NotoSansJPBlack",
+          weight: 900,
+          style: "normal",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Black.otf",
-            true
+            true,
+          ),
+        },
+        {
+          name: "NotoSansJPBold",
+          weight: 800,
+          style: "normal",
+          data: await read(
+            "./src/public/assets/fonts/NotoSansCJKjp-Bold.otf",
+            true,
           ),
         },
       ],
     },
-  })
+  }),
 );
 
 site.use(
@@ -100,7 +111,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  })
+  }),
 );
 
 site.use(
@@ -115,7 +126,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  })
+  }),
 );
 
 site.use(metas());
@@ -132,7 +143,7 @@ site.use(
         },
       ],
     ],
-  })
+  }),
 );
 
 site.use(footnote());
