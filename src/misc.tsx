@@ -1,9 +1,10 @@
-import { SITE_TITLE, SITE_DESCRIPTION } from "./consts.ts";
+import { SITE_DESCRIPTION } from "./consts.ts";
 
 export const layout = "layouts/Base.tsx";
+export const openGraphLayout = "layouts/BaseOGImage.tsx";
 export const templateEngine = "jsx";
 
-export const title = `MISC - ${SITE_TITLE}`;
+export const title = "MISC";
 export const metas = {
   title: "=title",
   description: SITE_DESCRIPTION,
