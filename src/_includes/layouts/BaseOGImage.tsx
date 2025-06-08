@@ -1,5 +1,5 @@
 import { SITE_TITLE } from "../../consts.ts";
-import { encodeBase64 } from "jsr:@std/encoding";
+import { encodeBase64 } from "jsr:@std/encoding/base64";
 
 const ogImage = await Deno.readFile("./src/public/assets/ogp/ogimage.png");
 const base64ImageSource = `data:image/png;base64,${encodeBase64(ogImage)}`;
