@@ -1,6 +1,7 @@
 import { SITE_DESCRIPTION, SITE_TITLE } from "./consts.ts";
 
 export const layout = "layouts/Base.tsx";
+export const openGraphLayout = "layouts/BaseOGImage.tsx";
 export const title = SITE_TITLE;
 export const metas = {
   title: SITE_TITLE,
