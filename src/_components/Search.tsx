@@ -44,9 +44,9 @@ export default function () {
             >
               <label
                 htmlFor="pagefind_modal"
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                className="btn btn-circle btn-ghost absolute right-2 top-2 h-10 w-10 min-h-10"
               >
-                ✕
+                <span className="text-xl">✕</span>
               </label>
             </div>
           </div>

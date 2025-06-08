@@ -28,12 +28,12 @@ export function applyTheme(theme: Theme, animate = false) {
   if (animate && bodyElement) {
     bodyElement.classList.add("theme-transition");
     setTimeout(() => {
-        bodyElement.classList.remove("theme-transition");
+      bodyElement.classList.remove("theme-transition");
     }, 200);
   }
 
   if (theme === "dark") {
-    rootElement.setAttribute("data-theme", "dim");
+    rootElement.setAttribute("data-theme", "sunset");
   } else {
     rootElement.setAttribute("data-theme", "retro");
   }

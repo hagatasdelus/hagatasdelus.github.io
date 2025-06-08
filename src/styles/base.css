@@ -7,7 +7,7 @@
 @plugin "tailwindcss/typography";
 @plugin "daisyui";
 
-[data-theme="dim"] {
+[data-theme="sunset"] {
     --pagefind-ui-text: oklch(var(--bc));
     --pagefind-ui-background: oklch(var(--b1));
     --pagefind-ui-border: oklch(var(--b2));
