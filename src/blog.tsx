@@ -1,9 +1,10 @@
-import { SITE_TITLE, SITE_DESCRIPTION } from "./consts.ts";
+import { SITE_DESCRIPTION } from "./consts.ts";
 import PostList from "./_components/PostList.tsx";
 import Search from "./_components/Search.tsx";
 
 export const layout = "layouts/Base.tsx";
-export const title = `Blog - ${SITE_TITLE}`;
+export const openGraphLayout = "layouts/BaseOGImage.tsx";
+export const title = "Blog";
 export const metas = {
   title: "=title",
   description: SITE_DESCRIPTION,
