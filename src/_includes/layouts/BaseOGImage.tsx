@@ -35,7 +35,7 @@ export default function ({ title }: { title: string }) {
       >
         <div
           style={{
-            fontSize: 60,
+            fontSize: 70,
             color: "#000",
             lineHeight: 1.3,
             textAlign: "center",
