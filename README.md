@@ -20,7 +20,6 @@ deno task serve
 
 ## ToDo
 
-- OGP
 - highlight by theme
 
 </div>
