@@ -6,14 +6,16 @@
     "serve": "deno task lume -s"
   },
   "imports": {
-    "lume/": "https://deno.land/x/lume@v2.5.3/",
-    "date-fns": "npm:date-fns"
+    "lume/": "https://deno.land/x/lume@v3.0.2/",
+    "date-fns": "npm:date-fns",
+        "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.8/jsx-runtime.ts",
   },
   "compilerOptions": {
     "types": ["lume/types.ts"],
     "jsx": "react-jsx",
-    "jsxImportSource": "npm:react",
-    "jsxImportSourceTypes": "npm:@types/react"
+    "jsxImportSource": "lume",
+    // "jsxImportSource": "npm:react",
+    // "jsxImportSourceTypes": "npm:@types/react"
   },
   "nodeModulesDir": "auto",
   "fmt": {
