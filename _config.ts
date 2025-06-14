@@ -38,26 +38,21 @@ const highlighter = await createHighlighter({
 
 const site = lume({
   src: "./src",
-  // location: new URL("https://hagatasdelus.github.io"),
+  location: new URL("https://hagatasdelus.github.io"),
 });
-
-site.add("./images", "images");
-site.add("./public/assets/icons", "icons");
 
 site.use(jsx());
 site.use(mdx());
-
-site.add([".css", ".js", ".ts"]);
-site.use(tailwindcss({ options: tailwindOptions }));
-site.use(postcss());
-
-site.use(esbuild());
 site.use(base_path());
 
 site.use(minify_html());
 site.use(gzip());
 
+site.use(esbuild());
 site.use(sitemap());
+
+site.copy("./images", "images");
+site.copy("./public/assets/icons", "icons");
 
 site.use(
   favicon({
@@ -71,7 +66,7 @@ site.use(
         format: "png",
       },
     ],
-  }),
+  })
 );
 
 site.use(
@@ -87,7 +82,7 @@ site.use(
           style: "normal",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Black.otf",
-            true,
+            true
           ),
         },
         {
@@ -96,12 +91,12 @@ site.use(
           style: "normal",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Bold.otf",
-            true,
+            true
           ),
         },
       ],
     },
-  }),
+  })
 );
 
 site.use(
@@ -116,7 +111,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(
@@ -131,7 +126,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(metas());
@@ -148,10 +143,13 @@ site.use(
         },
       ],
     ],
-  }),
+  })
 );
 
 site.use(footnote());
+
+site.use(tailwindcss({ options: tailwindOptions }));
+site.use(postcss());
 
 site.use(pagefind());
 
