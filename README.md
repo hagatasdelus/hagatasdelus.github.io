@@ -8,7 +8,15 @@
 
 <div>
 
-## Building
+## Usage
+
+### Build
+
+```
+deno task build
+```
+
+### Dev
 
 ```
 deno task serve
