@@ -29,6 +29,8 @@ deno task serve
 ## ToDo
 
 - highlight by theme
+- Table of Contents
+- Next/Prev diary button
 
 </div>
 
