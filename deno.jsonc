@@ -13,7 +13,6 @@
     "types": ["lume/types.ts"],
     "jsx": "react-jsx",
     "jsxImportSource": "npm:@lumeland/ssx"
-    // "jsxImportSourceTypes": "npm:@types/react"
   },
   "nodeModulesDir": "auto",
   "fmt": {
