@@ -3,7 +3,6 @@ import jsx from "lume/plugins/jsx.ts";
 import gzip from "lume/plugins/gzip.ts";
 import pagefind from "lume/plugins/pagefind.ts";
 import sitemap from "lume/plugins/sitemap.ts";
-import postcss from "lume/plugins/postcss.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import mdx from "lume/plugins/mdx.ts";
 import metas from "lume/plugins/metas.ts";
@@ -11,6 +10,7 @@ import minify_html from "lume/plugins/minify_html.ts";
 import base_path from "lume/plugins/base_path.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import ogImages from "lume/plugins/og_images.ts";
+// import extractDate from "lume/plugins/extract_date.ts";
 
 import favicon from "lume/plugins/favicon.ts";
 import feed from "lume/plugins/feed.ts";
@@ -22,7 +22,7 @@ import { read } from "lume/core/utils/read.ts";
 import footnote from "./plugins/footnote.ts";
 import ogLinkCard from "./plugins/og_linkcard.ts";
 
-import tailwindOptions from "./tailwind.config.js";
+// import tailwindOptions from "./tailwind.config.js";
 import {
   AUTHER,
   SITE_DESCRIPTION,
@@ -43,16 +43,19 @@ const site = lume({
 
 site.use(jsx());
 site.use(mdx());
-site.use(base_path());
+// site.add("/index.page.tsx");
+// site.use(esbuild());
+site.use(tailwindcss());
+site.add("styles/tailwind.css");
 
 site.use(minify_html());
 site.use(gzip());
 
-site.use(esbuild());
 site.use(sitemap());
+site.use(base_path());
 
-site.copy("./images", "images");
-site.copy("./public/assets/icons", "icons");
+site.add("./images", "images");
+site.add("./public/assets/icons", "icons");
 
 site.use(
   favicon({
@@ -71,8 +74,7 @@ site.use(
 
 site.use(
   ogImages({
-    cache: true,
-    satori: {
+    options: {
       width: 1200,
       height: 630,
       fonts: [
@@ -98,6 +100,7 @@ site.use(
     },
   })
 );
+// site.use(extractDate());
 
 site.use(
   feed({
@@ -148,8 +151,6 @@ site.use(
 
 site.use(footnote());
 
-site.use(tailwindcss({ options: tailwindOptions }));
-site.use(postcss());
 
 site.use(pagefind());
 
