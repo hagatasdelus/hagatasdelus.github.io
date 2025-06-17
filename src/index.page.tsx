@@ -12,7 +12,7 @@ export default function Home({}: Lume.Data) {
   // helpers: Lume.Helpers
   return (
     <div className="grid place-items-center w-full h-full">
-      <h3 className="text-3xl">Hi! I'm Hagata</h3>
+      <p className="text-3xl">Hi! I'm Hagata</p>
     </div>
   );
 }
