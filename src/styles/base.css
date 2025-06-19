@@ -51,6 +51,9 @@ body {
 }
 
 @utility flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #theme-toggle:hover {
