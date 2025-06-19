@@ -8,16 +8,13 @@ const navigation = [
   { name: "Misc", href: "/misc/" },
 ];
 
-const linkStyle =
-  "text-gray-500 dark:text-gray-300 hover:text-accent dark:hover:text-accent";
-
 export default function Header() {
   return (
     <header>
       <div className="container mx-auto px-4 md:px-8 lg:px-12 max-w-5xl">
         <nav className="grid grid-cols-[auto_1fr] items-center h-16">
           <div className="text-2xl font-bold">
-            <a href="/" className={linkStyle}>
+            <a href="/" className="text-link-interactive">
               {SITE_TITLE}
             </a>
           </div>
@@ -25,16 +22,16 @@ export default function Header() {
           <div className="justify-self-end flex items-center space-x-4">
             <div
               id="theme-toggle"
-              className={`cursor-pointer p-2 ${linkStyle}`}
+              className="cursor-pointer p-2 flex-center text-link-interactive"
               aria-label="テーマ切替"
             >
               <span className="relative inline-block w-6 h-6">
-                <span id="sun-icon" className="absolute inset-0 theme-icon">
+                <span id="sun-icon" className="absolute inset-0 flex-center">
                   <SunIcon />
                 </span>
                 <span
                   id="moon-icon"
-                  className="absolute inset-0 hidden theme-icon"
+                  className="absolute inset-0 hidden flex-center"
                 >
                   <MoonIcon />
                 </span>
@@ -51,7 +48,7 @@ export default function Header() {
 
               <label
                 htmlFor="menu-toggle"
-                className={`cursor-pointer ${linkStyle}`}
+                className="cursor-pointer text-link-interactive"
               >
                 <svg
                   className="w-6 h-6"
@@ -81,7 +78,7 @@ export default function Header() {
                 {navigation.map((item) => (
                   <li key={item.name} className="py-2 px-4">
                     <label htmlFor="menu-toggle" className="cursor-pointer">
-                      <a href={item.href} className={linkStyle}>
+                      <a href={item.href} className="text-link-interactive">
                         {item.name}
                       </a>
                     </label>
@@ -93,7 +90,7 @@ export default function Header() {
             <ul className="hidden md:flex space-x-4">
               {navigation.map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className={linkStyle}>
+                  <a href={item.href} className="text-link-interactive">
                     {item.name}
                   </a>
                 </li>
