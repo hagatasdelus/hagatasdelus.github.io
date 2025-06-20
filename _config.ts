@@ -8,9 +8,9 @@ import mdx from "lume/plugins/mdx.ts";
 import metas from "lume/plugins/metas.ts";
 import minify_html from "lume/plugins/minify_html.ts";
 import base_path from "lume/plugins/base_path.ts";
-import esbuild from "lume/plugins/esbuild.ts";
+// import esbuild from "lume/plugins/esbuild.ts";
 import ogImages from "lume/plugins/og_images.ts";
-// import extractDate from "lume/plugins/extract_date.ts";
+import extractDate from "lume/plugins/extract_date.ts";
 
 import favicon from "lume/plugins/favicon.ts";
 import feed from "lume/plugins/feed.ts";
@@ -46,7 +46,8 @@ site.use(mdx());
 // site.add("/index.page.tsx");
 // site.use(esbuild());
 site.use(tailwindcss());
-site.add("styles/tailwind.css");
+site.add("styles/base.css");
+site.add("styles/theme.css");
 
 site.use(minify_html());
 site.use(gzip());
@@ -100,7 +101,7 @@ site.use(
     },
   })
 );
-// site.use(extractDate());
+site.use(extractDate());
 
 site.use(
   feed({
