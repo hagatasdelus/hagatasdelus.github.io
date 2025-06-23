@@ -55,21 +55,11 @@ site.use(gzip());
 site.use(sitemap());
 site.use(base_path());
 
-site.add("./images", "images");
-site.add("./public/assets/icons", "icons");
+site.add("public/assets", "/");
 
 site.use(
   favicon({
-    input: "/icons/favicon.svg",
-    favicons: [
-      { url: "/icons/favicon.ico", size: [48], rel: "icon", format: "ico" },
-      {
-        url: "/icons/apple-touch-icon.png",
-        size: [180],
-        rel: "apple-touch-icon",
-        format: "png",
-      },
-    ],
+    input: "/favicon.svg",
   })
 );
 
@@ -83,19 +73,13 @@ site.use(
           name: "NotoSansJPBlack",
           weight: 900,
           style: "normal",
-          data: await read(
-            "./src/public/assets/fonts/NotoSansCJKjp-Black.otf",
-            true
-          ),
+          data: await read("./static/fonts/NotoSansCJKjp-Black.otf", true),
         },
         {
           name: "NotoSansJPBold",
           weight: 800,
           style: "normal",
-          data: await read(
-            "./src/public/assets/fonts/NotoSansCJKjp-Bold.otf",
-            true
-          ),
+          data: await read("./static/fonts/NotoSansCJKjp-Bold.otf", true),
         },
       ],
     },
