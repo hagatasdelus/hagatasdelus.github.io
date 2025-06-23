@@ -19,7 +19,7 @@ export default function () {
       <div className="prose md:prose-lg mx-auto">
         <figure className="flex justify-center">
           <img
-            src={`/icons/hagata.png`}
+            src={`/public/hagata.png`}
             alt="hagata"
             className="h-48 w-48 rounded-full"
           />
