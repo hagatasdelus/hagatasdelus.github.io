@@ -10,7 +10,6 @@ export const metas = {
 };
 
 export default function () {
-  // children, title
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="prose md:prose-lg mx-auto md:mx-6">
@@ -19,7 +18,7 @@ export default function () {
       <div className="prose md:prose-lg mx-auto">
         <figure className="flex justify-center">
           <img
-            src={`/public/hagata.png`}
+            src={`/hagata.png`}
             alt="hagata"
             className="h-48 w-48 rounded-full"
           />
