@@ -8,7 +8,7 @@ import mdx from "lume/plugins/mdx.ts";
 import metas from "lume/plugins/metas.ts";
 import minify_html from "lume/plugins/minify_html.ts";
 import base_path from "lume/plugins/base_path.ts";
-// import esbuild from "lume/plugins/esbuild.ts";
+import esbuild from "lume/plugins/esbuild.ts";
 import ogImages from "lume/plugins/og_images.ts";
 import extractDate from "lume/plugins/extract_date.ts";
 
@@ -43,15 +43,15 @@ const site = lume({
 
 site.use(jsx());
 site.use(mdx());
-// site.add("/index.page.tsx");
-// site.use(esbuild());
+site.add("scripts/themeToggle.ts");
+site.use(esbuild());
+
 site.use(tailwindcss());
 site.add("styles/base.css");
 site.add("styles/theme.css");
 
 site.use(minify_html());
 site.use(gzip());
-
 site.use(sitemap());
 site.use(base_path());
 
@@ -60,6 +60,15 @@ site.add("public/assets", "/");
 site.use(
   favicon({
     input: "/favicon.svg",
+    favicons: [
+      { url: "/favicon.ico", size: [48], rel: "icon", format: "ico" },
+      {
+        url: "/apple-touch-icon.png",
+        size: [180],
+        rel: "apple-touch-icon",
+        format: "png",
+      },
+    ],
   })
 );
 
@@ -135,8 +144,6 @@ site.use(
 );
 
 site.use(footnote());
-
-
 site.use(pagefind());
 
 site.ignore("README.md", "node_modules");
