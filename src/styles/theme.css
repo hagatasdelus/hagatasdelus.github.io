@@ -1,0 +1,22 @@
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: "Sawarabi Gothic", sans-serif;
+  font-style: normal;
+  background: oklch(var(--b1));
+  color: oklch(var(--bc));
+}
+
+#theme-icon:hover {
+  transform: scale(1.1);
+}
+
+#theme-toggle:hover {
+  opacity: 0.8;
+}
+
+html.theme-transition {
+  transition: all 0.2s ease-in-out;
+}

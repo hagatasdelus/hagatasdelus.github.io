@@ -1,52 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@plugin "tailwindcss/typography";
-@plugin "daisyui";
-
-[data-theme="sunset"] {
-    --pagefind-ui-text: oklch(var(--bc));
-    --pagefind-ui-background: oklch(var(--b1));
-    --pagefind-ui-border: oklch(var(--b2));
-    --pagefind-ui-tag: oklch(var(--b2));
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: retro --default, sunset --prefersdark;
 }
 
-html {
-    scrollbar-gutter: stable;
-}
+@source "./src/**/*.{html,md,mdx,js,jsx,ts,tsx}";
 
-body {
-    font-family: "Sawarabi Gothic", sans-serif;
-    font-style: normal;
-    background: oklch(var(--b1));
-    color: oklch(var(--bc));
-}
+@variant dark (&:where([data-theme="sunset"], [data-theme="sunset"] *));
 
-.theme-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-@utility text-link-interactive {
-  color: theme("colors.gray.500");
-  &:hover {
-    color: var(--color-accent);
-  }
-  @media (prefers-color-scheme: dark) {
-    color: theme("colors.gray.300");
+@layer utilities {
+  .prose a {
+    text-decoration-offset: 4px;
     &:hover {
-      color: var(--color-accent);
+      color: var(--color-primary);
+      text-decoration-thickness: 2px;
+      transition: all 0.2s ease-in-out;
     }
+  }
+  .prose {
+    color: var(--color-base-content);
   }
 }
 
@@ -56,18 +30,9 @@ body {
   justify-content: center;
 }
 
-#theme-toggle:hover {
-    opacity: 0.8;
-}
-
-#sun-icon.hidden,
-#moon-icon.hidden {
-    display: none;
-}
-
-body.theme-transition {
-    transition: all 0.2s ease-in-out;
-    /* transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
-    border-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
-    fill 0.2s ease-in-out;  */
+[data-theme="sunset"] {
+  --pagefind-ui-text: oklch(var(--bc));
+  --pagefind-ui-background: oklch(var(--b1));
+  --pagefind-ui-border: oklch(var(--b2));
+  --pagefind-ui-tag: oklch(var(--b2));
 }
