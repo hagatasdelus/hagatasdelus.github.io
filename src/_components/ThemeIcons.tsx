@@ -1,4 +1,4 @@
-export const SunIcon = () => (
+export const Sun = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -16,7 +16,7 @@ export const SunIcon = () => (
   </svg>
 );
 
-export const MoonIcon = () => (
+export const Moon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
