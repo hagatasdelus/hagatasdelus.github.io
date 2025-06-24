@@ -1,7 +1,7 @@
 import { SITE_TITLE } from "../../consts.ts";
 import { encodeBase64 } from "jsr:@std/encoding/base64";
 
-const ogImage = await Deno.readFile("./src/public/assets/ogp/ogimage.png");
+const ogImage = await Deno.readFile("./static/ogp/ogimage.png");
 const base64ImageSource = `data:image/png;base64,${encodeBase64(ogImage)}`;
 
 export default function ({
@@ -60,21 +60,23 @@ export default function ({
           }}
         >
           {tags.length > 0 &&
-            tags.filter((tag) => tag !== "posts").map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  backgroundColor: "#e0e0e0",
-                  color: "#333",
-                  padding: "8px 20px",
-                  borderRadius: 12,
-                  fontSize: 24,
-                  fontWeight: 500,
-                }}
-              >
-                {tag}
-              </span>
-            ))}
+            tags
+              .filter((tag) => tag !== "posts")
+              .map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    backgroundColor: "#e0e0e0",
+                    color: "#333",
+                    padding: "8px 20px",
+                    borderRadius: 12,
+                    fontSize: 24,
+                    fontWeight: 500,
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
         </div>
         <div
           style={{
