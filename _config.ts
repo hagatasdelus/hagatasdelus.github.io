@@ -69,7 +69,7 @@ site.use(
         format: "png",
       },
     ],
-  })
+  }),
 );
 
 site.use(
@@ -92,7 +92,7 @@ site.use(
         },
       ],
     },
-  })
+  }),
 );
 site.use(extractDate());
 
@@ -108,7 +108,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  })
+  }),
 );
 
 site.use(
@@ -123,7 +123,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  })
+  }),
 );
 
 site.use(metas());
@@ -140,7 +140,7 @@ site.use(
         },
       ],
     ],
-  })
+  }),
 );
 
 site.use(footnote());
