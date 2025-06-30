@@ -21,6 +21,7 @@ import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
 import { read } from "lume/core/utils/read.ts";
 import footnote from "./plugins/footnote.ts";
 import ogLinkCard from "./plugins/og_linkcard.ts";
+import toc from "./plugins/togglableToc.ts";
 
 import tailwindOptions from "./tailwind.config.js";
 import {
@@ -66,7 +67,7 @@ site.use(
         format: "png",
       },
     ],
-  }),
+  })
 );
 
 site.use(
@@ -82,7 +83,7 @@ site.use(
           style: "normal",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Black.otf",
-            true,
+            true
           ),
         },
         {
@@ -91,12 +92,12 @@ site.use(
           style: "normal",
           data: await read(
             "./src/public/assets/fonts/NotoSansCJKjp-Bold.otf",
-            true,
+            true
           ),
         },
       ],
     },
-  }),
+  })
 );
 
 site.use(
@@ -111,7 +112,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(
@@ -126,7 +127,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(metas());
@@ -142,8 +143,9 @@ site.use(
           theme: "everforest-dark",
         },
       ],
+      toc,
     ],
-  }),
+  })
 );
 
 site.use(footnote());
