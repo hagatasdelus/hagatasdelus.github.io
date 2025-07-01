@@ -1,0 +1,265 @@
+.toc {
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: oklch(var(--b1));
+}
+
+.toc-title {
+  font-weight: 600;
+  color: oklch(var(--bc));
+  cursor: pointer;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-item {
+  list-style: none;
+  margin: 0;
+}
+
+.toc-link {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  color: oklch(var(--bc) / 0.7);
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.toc-link:hover {
+  color: oklch(var(--p));
+  background-color: oklch(var(--b2));
+}
+
+.toc-pc {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  width: 16rem;
+  max-height: 24rem;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 1rem;
+  display: none;
+  background-color: oklch(var(--b1));
+  border-radius: 0.5rem;
+}
+
+/* デスクトップサイズでのみ表示 */
+@media (min-width: 1024px) {
+  .toc-pc {
+    display: block;
+  }
+}
+
+.toc-pc .toc-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc-pc .toc-item {
+  list-style: none;
+}
+
+.toc-pc .toc-link.active {
+  font-weight: 700;
+  color: oklch(var(--ac));
+  background-color: oklch(var(--b3));
+  border-left: 3px solid oklch(var(--p));
+}
+
+.toc-pc .toc-link.current {
+  font-weight: 700;
+  color: oklch(var(--p));
+  background-color: oklch(var(--p) / 0.1);
+  border-left: 3px solid oklch(var(--p));
+  transform: translateX(2px);
+}
+
+.toc-pc .toc-level-2 {
+  padding-left: 0;
+}
+
+.toc-pc .toc-level-3 {
+  padding-left: 0.75rem;
+}
+
+.toc-pc .toc-level-4 {
+  padding-left: 1.5rem;
+}
+
+.toc-pc .toc-level-5 {
+  padding-left: 2.25rem;
+}
+
+.toc-pc .toc-level-6 {
+  padding-left: 3rem;
+}
+
+.toc-mobile {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .toc-mobile {
+    display: none;
+  }
+}
+
+.toc-mobile .toc-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc-mobile .toc-item {
+  list-style: none;
+}
+
+.toc-mobile .toc-level-2 {
+  padding-left: 0;
+}
+
+.toc-mobile .toc-level-3 {
+  padding-left: 0.75rem;
+}
+
+.toc-mobile .toc-level-4 {
+  padding-left: 1.5rem;
+}
+
+.toc-mobile .toc-level-5 {
+  padding-left: 2.25rem;
+}
+
+.toc-mobile .toc-level-6 {
+  padding-left: 3rem;
+}
+
+.toc details {
+  width: 100%;
+}
+
+.toc summary {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.toc summary::marker {
+  content: none;
+  display: none;
+}
+
+/* モバイル専用のデフォルトマーカー非表示 */
+@media (max-width: 1023px) {
+  .toc-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-mobile summary::marker {
+    content: none;
+    display: none;
+  }
+
+  .toc-mobile summary {
+    list-style-type: none;
+  }
+}
+
+.toc summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.toc details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+/* スクロール追従ハイライト */
+@media (prefers-reduced-motion: no-preference) {
+  .toc-link {
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+/* :target を使用したハイライト */
+.toc-pc .toc-link:target,
+.toc-pc .toc-link[href="#"]:target {
+  font-weight: 700;
+  color: oklch(var(--ac));
+  background-color: oklch(var(--b3));
+  border-left: 2px solid oklch(var(--a));
+}
+
+/* 見出しが表示されている時の対応するTOCリンクのハイライト */
+h1:target ~ * .toc-pc .toc-link[href^="#"],
+h2:target ~ * .toc-pc .toc-link[href^="#"],
+h3:target ~ * .toc-pc .toc-link[href^="#"],
+h4:target ~ * .toc-pc .toc-link[href^="#"],
+h5:target ~ * .toc-pc .toc-link[href^="#"],
+h6:target ~ * .toc-pc .toc-link[href^="#"] {
+  color: oklch(var(--ac));
+  background-color: oklch(var(--b3) / 0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  .toc-pc {
+    background-color: oklch(var(--b1));
+  }
+}
+
+@media print {
+  .toc {
+    display: none;
+  }
+}
+
+.toc-link:focus {
+  outline: 2px solid oklch(var(--p));
+  outline-offset: 2px;
+}
+
+/* TOCのスムーズスクロール */
+.toc-pc {
+  scroll-behavior: smooth;
+}
+
+/* TOCの幅調整（大画面） */
+@media (min-width: 1536px) {
+  .toc-pc {
+    width: 18rem;
+  }
+}
+
+/* スクロールバーのスタイリング（PC用TOC） */
+.toc-pc::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.toc-pc::-webkit-scrollbar-track {
+  background-color: oklch(var(--b2));
+  border-radius: 0.25rem;
+}
+
+.toc-pc::-webkit-scrollbar-thumb {
+  background-color: oklch(var(--b3));
+  border-radius: 0.25rem;
+}
+
+.toc-pc::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(var(--bc) / 0.2);
+}
