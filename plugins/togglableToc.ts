@@ -103,9 +103,14 @@ function collectHeadings(
     if (node.tagName && node.tagName.startsWith("h")) {
       const level = parseInt(node.tagName.slice(1));
       if (options.headingLevels.includes(level)) {
-        const text = toString(
+        let text = toString(
           node as unknown as Parameters<typeof toString>[0]
         ).trim();
+
+        // For footnote labels, treat “Footnotes” as "脚注"
+        if (node.properties?.id === "footnote-label" && text === "Footnotes")
+          text = "脚注";
+
         if (text) {
           const id =
             (node.properties?.id as string) || createSlug(text, existingIds);
@@ -307,23 +312,6 @@ export default function togglableToc(userOptions: TocOptions = {}) {
       };
       tree.children.push(scriptElement);
     }
-
-    // 脚注ラベルの「Footnotes」を「脚注」に変更
-    visit(tree, "element", (node: ElementNode) => {
-      if (
-        node.tagName === "h2" &&
-        node.properties?.id === "footnote-label" &&
-        node.properties?.class === "sr-only"
-      ) {
-        // テキストノードを探して変更
-        visit(node, "text", (textNode: TextNode) => {
-          if (textNode.value === "Footnotes") {
-            textNode.value = "脚注";
-          }
-        });
-      }
-    });
-
     return tree;
   };
 }
