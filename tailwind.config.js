@@ -3,10 +3,8 @@ import typography from "npm:@tailwindcss/typography";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./src/**/*.{html,md,mdx,js,jsx,ts,tsx}",
-  ],
-  darkMode: ['selector', '[data-theme="sunset"]'],
+  content: ["./src/**/*.{html,md,mdx,js,jsx,ts,tsx}"],
+  darkMode: ["selector", '[data-theme="sunset"]'],
   plugins: [daisyui, typography],
   daisyui: {
     themes: ["retro", "sunset"],
