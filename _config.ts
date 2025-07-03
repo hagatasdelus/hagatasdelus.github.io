@@ -21,6 +21,7 @@ import rehypeShikiFromHighlighter from "npm:@shikijs/rehype/core";
 import { read } from "lume/core/utils/read.ts";
 import footnote from "./plugins/footnote.ts";
 import ogLinkCard from "./plugins/og_linkcard.ts";
+import toc from "./plugins/togglableToc.ts";
 
 // import tailwindOptions from "./tailwind.config.js";
 import {
@@ -44,11 +45,13 @@ const site = lume({
 site.use(jsx());
 site.use(mdx());
 site.add("scripts/themeToggle.ts");
+site.add("scripts/tocHighlight.ts");
 site.use(esbuild());
 
 site.use(tailwindcss());
 site.add("styles/base.css");
 site.add("styles/theme.css");
+site.add("styles/blog.css");
 
 site.use(minify_html());
 site.use(gzip());
@@ -69,7 +72,7 @@ site.use(
         format: "png",
       },
     ],
-  }),
+  })
 );
 
 site.use(
@@ -92,7 +95,7 @@ site.use(
         },
       ],
     },
-  }),
+  })
 );
 site.use(extractDate());
 
@@ -108,7 +111,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(
@@ -123,7 +126,7 @@ site.use(
       authorUrl: SITE_URL,
       published: new Date(),
     },
-  }),
+  })
 );
 
 site.use(metas());
@@ -139,8 +142,9 @@ site.use(
           theme: "everforest-dark",
         },
       ],
+      toc,
     ],
-  }),
+  })
 );
 
 site.use(footnote());
