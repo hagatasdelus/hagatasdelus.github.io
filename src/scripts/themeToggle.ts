@@ -26,8 +26,13 @@ const updateTheme = (isDarkMode: boolean): void => {
   const sun = document.getElementById("sun-icon");
   const moon = document.getElementById("moon-icon");
 
-  sun.classList.toggle("hidden");
-  moon.classList.toggle("hidden");
+  if (isDarkMode) {
+    sun.classList.add("hidden");
+    moon.classList.remove("hidden");
+  } else {
+    sun.classList.remove("hidden");
+    moon.classList.add("hidden");
+  }
 };
 
 const toggleTheme = (): void => {
@@ -53,9 +58,9 @@ const toggleTheme = (): void => {
 
   localStorage.setItem("theme", getTheme(isDarkMode));
 
-  document.documentElement.classList.add("theme-transition");
+  document.body.classList.add("theme-transition");
   setTimeout(() => {
-    document.documentElement.classList.remove("theme-transition");
+    document.body.classList.remove("theme-transition");
   }, 200);
 };
 
