@@ -8,7 +8,15 @@
 
 <div>
 
-## Building
+## Usage
+
+### Build
+
+```
+deno task build
+```
+
+### Dev
 
 ```
 deno task serve
@@ -20,8 +28,11 @@ deno task serve
 
 ## ToDo
 
-- OGP
 - highlight by theme
+- Togglable Table of Contents
+- Next/Prev diary button
+- Code Block File Name
+- Code Block Copy
 
 </div>
 

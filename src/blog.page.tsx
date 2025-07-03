@@ -41,7 +41,8 @@ function groupPostsByYear(posts: Lume.Page[]): YearlyPostGroup[] {
   }, []);
 }
 
-export default function ({ search }: Lume.Data, _helpers: Lume.Helpers) {
+export default function ({ search }: Lume.Data) {
+  // helpers: Lume.Helpers
   const sortedPosts = search
     .pages("posts")
     // .filter((page) => page.published == true)

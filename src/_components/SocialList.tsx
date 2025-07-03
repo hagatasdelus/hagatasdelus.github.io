@@ -76,7 +76,7 @@ export default function SocialList() {
       {social.map((media) => (
         <li key={media.name}>
           <a
-            className="rounded fill-gray-500 dark:fill-gray-300 hover:fill-accent dark:hover:fill-accent"
+            className="rounded-sm fill-gray-500 dark:fill-gray-300 hover:fill-accent dark:hover:fill-accent"
             href={media.url}
             title={media.name}
             target="_blank"

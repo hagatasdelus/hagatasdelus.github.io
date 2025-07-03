@@ -1,7 +1,7 @@
 import { SITE_TITLE } from "../../consts.ts";
-import { encodeBase64 } from "jsr:@std/encoding";
+import { encodeBase64 } from "jsr:@std/encoding/base64";
 
-const ogImage = await Deno.readFile("./src/public/assets/ogp/ogimage.png");
+const ogImage = await Deno.readFile("./static/ogp/ogimage.png");
 const base64ImageSource = `data:image/png;base64,${encodeBase64(ogImage)}`;
 
 export default function ({ title }: { title: string }) {
@@ -35,7 +35,7 @@ export default function ({ title }: { title: string }) {
       >
         <div
           style={{
-            fontSize: 60,
+            fontSize: 70,
             color: "#000",
             lineHeight: 1.3,
             textAlign: "center",

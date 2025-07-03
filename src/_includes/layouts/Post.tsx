@@ -25,13 +25,13 @@ export default function Post(data: Lume.Data) {
           <meta charSet="UTF-8" />
           <title>{title}</title>
           <link rel="stylesheet" href="/styles/base.css" />
+          <link rel="stylesheet" href="/styles/theme.css" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
           <meta name="description" content={SITE_DESCRIPTION} />
-          <script src="/scripts/themeInit.js"></script>
-          <script type="module" src="/scripts/toggleTheme.js"></script>
+          <script src="/scripts/themeToggle.js"></script>
         </head>
         <body className="flex flex-col min-h-screen">
           <Header />
