@@ -57,6 +57,7 @@
     "npm:daisyui@*": "5.0.43",
     "npm:date-fns@*": "4.1.0",
     "npm:estree-walker@3.0.3": "3.0.3",
+    "npm:hast-util-to-string@*": "3.0.1",
     "npm:ico-endec@0.1.6": "0.1.6",
     "npm:lightningcss-wasm@1.30.1": "1.30.1",
     "npm:markdown-it-attrs@4.3.1": "4.3.1_markdown-it@14.1.0",
