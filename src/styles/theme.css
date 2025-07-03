@@ -5,8 +5,8 @@ html {
 body {
   font-family: "Sawarabi Gothic", sans-serif;
   font-style: normal;
-  background: oklch(var(--b1));
-  color: oklch(var(--bc));
+  background: var(--color-base-100);
+  color: var(--color-base-content);
 }
 
 #theme-icon:hover {
@@ -17,6 +17,6 @@ body {
   opacity: 0.8;
 }
 
-html.theme-transition {
+body.theme-transition {
   transition: all 0.2s ease-in-out;
 }
