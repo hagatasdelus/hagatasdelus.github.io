@@ -17,6 +17,6 @@ body {
   opacity: 0.8;
 }
 
-html.theme-transition {
+body.theme-transition {
   transition: all 0.2s ease-in-out;
 }

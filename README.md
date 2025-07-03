@@ -29,10 +29,10 @@ deno task serve
 ## ToDo
 
 - highlight by theme
-- Togglable Table of Contents
-- Next/Prev diary button
 - Code Block File Name
 - Code Block Copy
+- Content Ruby
+- View Transition
 
 </div>
 
