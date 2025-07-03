@@ -15,7 +15,7 @@ export default function ThemeToggle() {
               <source src="/sounds/todark.mp3" type="audio/mp3" />
             </audio>
           </span>
-          <span id="moon-icon" className="absolute inset-0 hidden">
+          <span id="moon-icon" className="absolute inset-0">
             <Moon />
             <audio id="theme-sound">
               <source src="/sounds/tolight.mp3" type="audio/mp3" />
