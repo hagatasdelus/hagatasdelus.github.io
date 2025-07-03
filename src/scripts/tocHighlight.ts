@@ -13,6 +13,7 @@ class TOCHighlight {
   private headings: HTMLElement[] = [];
   private observer: IntersectionObserver | null = null;
   private currentActiveLink: HTMLAnchorElement | null = null;
+  private isScrolling: boolean = false;
 
   constructor(config: Partial<TOCHighlightConfig> = {}) {
     this.config = {
@@ -61,6 +62,9 @@ class TOCHighlight {
     };
 
     this.observer = new IntersectionObserver((entries) => {
+      // Skip processing while scrolling
+      if (this.isScrolling) return;
+
       const visibleHeadings = entries.filter((entry) => entry.isIntersecting);
 
       if (visibleHeadings.length === 0) return;
@@ -136,6 +140,7 @@ class TOCHighlight {
         if (targetId) {
           const targetElement = document.getElementById(targetId);
           if (targetElement) {
+            this.isScrolling = true;
             targetElement.scrollIntoView({
               behavior: "smooth",
               block: "start",
@@ -144,10 +149,35 @@ class TOCHighlight {
             history.replaceState(null, "", `#${targetId}`);
 
             this.highlightTOCLink(targetId);
+            // Wait for smooth scroll completion before releasing the flag
+            this.waitForScrollEnd(() => {
+              this.isScrolling = false;
+            });
           }
         }
       });
     });
+  }
+
+  private waitForScrollEnd(callback: () => void): void {
+    let scrollTimeout: number;
+
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        globalThis.removeEventListener("scroll", handleScroll);
+        callback();
+      }, 150); // Wait 150ms for scroll stop
+    };
+
+    globalThis.addEventListener("scroll", handleScroll);
+
+    // Set maximum standby time (2 seconds)
+    setTimeout(() => {
+      globalThis.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+      callback();
+    }, 2000);
   }
 
   public destroy(): void {
@@ -165,7 +195,7 @@ class TOCHighlight {
 
 if (typeof globalThis !== "undefined" && "document" in globalThis) {
   const initTOCHighlight = () => {
-    // PC表示の場合のみ初期化
+    // Initialization only for PC display
     if (globalThis.innerWidth >= 1024) {
       new TOCHighlight();
     }
