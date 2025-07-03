@@ -5,8 +5,8 @@ html {
 body {
   font-family: "Sawarabi Gothic", sans-serif;
   font-style: normal;
-  background: oklch(var(--b1));
-  color: oklch(var(--bc));
+  background: var(--color-base-100);
+  color: var(--color-base-content);
 }
 
 #theme-icon:hover {

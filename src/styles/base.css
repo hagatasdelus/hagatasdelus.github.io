@@ -31,8 +31,8 @@
 }
 
 [data-theme="sunset"] {
-  --pagefind-ui-text: oklch(var(--bc));
-  --pagefind-ui-background: oklch(var(--b1));
-  --pagefind-ui-border: oklch(var(--b2));
-  --pagefind-ui-tag: oklch(var(--b2));
+  --pagefind-ui-text: var(--color-base-content);
+  --pagefind-ui-background: var(--color-base-100);
+  --pagefind-ui-border: var(--color-base-200);
+  --pagefind-ui-tag: var(--color-base-200);
 }
