@@ -5,6 +5,7 @@
 @plugin "daisyui" {
   themes: retro --default, sunset --prefersdark;
 }
+@plugin "@iconify/tailwind4";
 
 @source "./src/**/*.{html,md,mdx,js,jsx,ts,tsx}";
 
