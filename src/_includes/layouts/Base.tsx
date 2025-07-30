@@ -16,12 +16,14 @@ export default ({ title, children }: Props) => {
           <title>{title}</title>
           <link rel="stylesheet" href="/styles/base.css" />
           <link rel="stylesheet" href="/styles/theme.css" />
+          <link rel="stylesheet" href="/styles/viewTransitions.css" />
           <meta name="description" content={SITE_DESCRIPTION} />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
           <script src="/scripts/themeToggle.js"></script>
+          <script src="/scripts/viewTransitions.js"></script>
         </head>
         <body className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Header />

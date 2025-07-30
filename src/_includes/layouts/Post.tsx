@@ -27,12 +27,14 @@ export default function Post(data: Lume.Data) {
           <link rel="stylesheet" href="/styles/base.css" />
           <link rel="stylesheet" href="/styles/theme.css" />
           <link rel="stylesheet" href="/styles/blog.css" />
+          <link rel="stylesheet" href="/styles/view-transitions.css" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
           <meta name="description" content={SITE_DESCRIPTION} />
           <script src="/scripts/themeToggle.js"></script>
+          <script src="/scripts/viewTransitions.js"></script>
         </head>
         <body className="flex flex-col min-h-screen">
           <Header />
