@@ -1,5 +1,3 @@
-import { Sun, Moon } from "./ThemeIcons.tsx";
-
 export default function ThemeToggle() {
   return (
     <div>
@@ -10,13 +8,13 @@ export default function ThemeToggle() {
       >
         <span id="theme-icon" className="relative inline-block w-6 h-6">
           <span id="sun-icon" className="absolute inset-0">
-            <Sun />
+            <span className="icon-[line-md--moon-alt-to-sunny-outline-loop-transition] w-6 h-6"></span>
             <audio id="theme-sound">
               <source src="/sounds/todark.mp3" type="audio/mp3" />
             </audio>
           </span>
           <span id="moon-icon" className="absolute inset-0">
-            <Moon />
+            <span className="icon-[line-md--sunny-outline-to-moon-alt-loop-transition] w-6 h-6"></span>
             <audio id="theme-sound">
               <source src="/sounds/tolight.mp3" type="audio/mp3" />
             </audio>
