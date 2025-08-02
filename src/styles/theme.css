@@ -20,3 +20,11 @@ body {
 body.theme-transition {
   transition: all 0.2s ease-in-out;
 }
+#sun-icon {
+  display: block;
+}
+
+#moon-icon {
+  display: none;
+}
+

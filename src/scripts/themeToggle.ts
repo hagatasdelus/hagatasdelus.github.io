@@ -22,17 +22,6 @@ applyThemeImmediately();
 const updateTheme = (isDarkMode: boolean): void => {
   const theme = getTheme(isDarkMode);
   document.documentElement.setAttribute("data-theme", theme);
-
-  const sun = document.getElementById("sun-icon");
-  const moon = document.getElementById("moon-icon");
-
-  if (isDarkMode) {
-    sun.classList.add("hidden");
-    moon.classList.remove("hidden");
-  } else {
-    sun.classList.remove("hidden");
-    moon.classList.add("hidden");
-  }
 };
 
 const toggleTheme = (): void => {
@@ -76,6 +65,14 @@ const initializeTheme = (): void => {
   const isDarkMode = storedTheme === "sunset" || (!storedTheme && prefersDark);
 
   toggleButton.checked = isDarkMode;
+
+  // DOMにも反映させるため、強制的に属性も設定
+  if (isDarkMode) {
+    toggleButton.setAttribute("checked", "checked");
+  } else {
+    toggleButton.removeAttribute("checked");
+  }
+
   updateTheme(isDarkMode);
 };
 
