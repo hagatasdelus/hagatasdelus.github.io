@@ -66,7 +66,6 @@ const initializeTheme = (): void => {
 
   toggleButton.checked = isDarkMode;
 
-  // DOMにも反映させるため、強制的に属性も設定
   if (isDarkMode) {
     toggleButton.setAttribute("checked", "checked");
   } else {

@@ -20,6 +20,7 @@ body {
 body.theme-transition {
   transition: all 0.2s ease-in-out;
 }
+
 #sun-icon {
   display: block;
 }
@@ -28,3 +29,10 @@ body.theme-transition {
   display: none;
 }
 
+#theme-toggle:checked ~ label #sun-icon {
+  display: none !important;
+}
+
+#theme-toggle:checked ~ label #moon-icon {
+  display: block !important;
+}
