@@ -30,9 +30,9 @@ body.theme-transition {
 }
 
 #theme-toggle:checked ~ label #sun-icon {
-  display: none !important;
+  display: none;
 }
 
 #theme-toggle:checked ~ label #moon-icon {
-  display: block !important;
+  display: block;
 }
