@@ -46,12 +46,14 @@ site.use(jsx());
 site.use(mdx());
 site.add("scripts/themeToggle.ts");
 site.add("scripts/tocHighlight.ts");
+site.add("scripts/viewTransitions.ts");
 site.use(esbuild());
 
 site.use(tailwindcss());
 site.add("styles/base.css");
 site.add("styles/theme.css");
 site.add("styles/blog.css");
+site.add("styles/view-transitions.css");
 
 site.use(minify_html());
 site.use(gzip());
