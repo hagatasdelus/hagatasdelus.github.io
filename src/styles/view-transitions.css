@@ -1,0 +1,240 @@
+/**
+ * View Transitions API のスタイル定義
+ * ヘッダーとフッターの永続化とメインコンテンツの遷移アニメーションを制御
+ */
+
+/* View Transitions がサポートされている場合の基本設定 */
+@supports (view-transition-name: none) {
+  /* 永続的な要素（ヘッダー）のビュー遷移名を設定 */
+  header {
+    view-transition-name: persistent-header;
+    contain: layout style paint;
+  }
+
+  /* ヘッダー内の具体的な要素に個別の遷移名を設定 */
+  header nav {
+    view-transition-name: header-nav;
+    contain: layout style paint;
+  }
+
+  header a {
+    view-transition-name: header-logo;
+    contain: layout style paint;
+  }
+
+  header svg {
+    view-transition-name: header-icons;
+    contain: layout style paint;
+  }
+
+  /* テーマトグルボタンも永続化 */
+  header input[type="checkbox"] {
+    view-transition-name: theme-toggle;
+  }
+
+  header label[for="theme-toggle"] {
+    view-transition-name: theme-button;
+    contain: layout style paint;
+  }
+
+  /* 永続的な要素（フッター）のビュー遷移名を設定 */
+  footer {
+    view-transition-name: persistent-footer;
+    contain: layout style paint;
+  }
+
+  /* フッター内のSVG要素 */
+  footer svg {
+    view-transition-name: footer-icons;
+    contain: layout style paint;
+  }
+
+  /* メインコンテンツエリアのビュー遷移名を設定 */
+  main {
+    view-transition-name: main-content;
+  }
+}
+
+/* ヘッダーの遷移アニメーションを無効化（ちらつき防止） */
+::view-transition-old(persistent-header),
+::view-transition-new(persistent-header) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ヘッダー内要素の遷移アニメーションを無効化 */
+::view-transition-old(header-nav),
+::view-transition-new(header-nav) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+::view-transition-old(header-logo),
+::view-transition-new(header-logo) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+::view-transition-old(header-icons),
+::view-transition-new(header-icons) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+::view-transition-old(theme-toggle),
+::view-transition-new(theme-toggle) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+::view-transition-old(theme-button),
+::view-transition-new(theme-button) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* フッターの遷移アニメーションを無効化（ちらつき防止） */
+::view-transition-old(persistent-footer),
+::view-transition-new(persistent-footer) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+::view-transition-old(footer-icons),
+::view-transition-new(footer-icons) {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* メインコンテンツの遷移アニメーション */
+::view-transition-old(main-content) {
+  animation: slide-out-to-left 250ms ease-in-out forwards;
+}
+
+::view-transition-new(main-content) {
+  animation: slide-in-from-right 250ms ease-in-out forwards;
+}
+
+/* スライドアウトのキーフレーム */
+@keyframes slide-out-to-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+/* スライドインのキーフレーム */
+@keyframes slide-in-from-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 動きの抑制設定への対応 */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation: none;
+  }
+
+  /* 動きを抑制する場合はフェードのみ */
+  ::view-transition-old(main-content) {
+    animation: simple-fade-out 150ms ease-out forwards;
+  }
+
+  ::view-transition-new(main-content) {
+    animation: simple-fade-in 150ms ease-in forwards;
+  }
+}
+
+/* シンプルなフェードアウト */
+@keyframes simple-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* シンプルなフェードイン */
+@keyframes simple-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ビュー遷移中のページ全体のスタイル調整 */
+::view-transition {
+  /* 遷移中のz-indexを適切に設定 */
+  z-index: 999;
+}
+
+/* 遷移中のルート要素のスタイル */
+::view-transition-group(root) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+}
+
+/* レスポンシブ対応: モバイル環境では遷移を控えめに */
+@media (max-width: 768px) {
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content) {
+    animation-duration: 200ms;
+  }
+
+  @keyframes slide-out-to-left {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+  }
+
+  @keyframes slide-in-from-right {
+    0% {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  /* ダークモード特有の調整があれば追加 */
+  /* 現在はベースのアニメーションをそのまま使用 */
+}
+
+/* アクセシビリティ: フォーカス管理 */
+::view-transition-new(main-content) *:focus-visible {
+  /* 遷移後のフォーカス表示を確実にする */
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
